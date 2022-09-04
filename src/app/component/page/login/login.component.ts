@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
     this.userService.login(loginRequest)
-      .subscribe(x => this._router.navigateByUrl("/home"))
+      .subscribe(x => console.log(x));
+    this._router.navigateByUrl("/home")
   }
 
 }
