@@ -1,0 +1,71 @@
+<div class="container-lg receipt-container position-relative">
+  <img src="https://bakeitwithlove.com/wp-content/uploads/2022/04/microwave-mac-and-cheese-sq.jpg"
+       class="main-image"/>
+  <div>
+    <a routerLink="/home">
+      <img src="assets/images/back.png" class="position-absolute top-0 start-0 translate-middle"/>
+    </a>
+  </div>
+  <div class="d-flex justify-content-around">
+    <div class="left-container">
+      <div class="details d-flex justify-content-evenly align-items-center p-1">
+        <div class="details-item">
+          <img src="assets/images/clock.png">
+          <div>{{receipt.timeToPrepare}}</div>
+        </div>
+        <div class="details-item text-center">
+          <img src="assets/images/difficulty.png">
+          <div>тежина: {{receipt.difficulty.toString()}}</div>
+        </div>
+        <div class="details-item">
+          <img src="assets/images/check.png"/>
+        </div>
+        <div class="details-item text-center">
+          <img src="assets/images/kcal.png">
+          <div>{{receipt.calories}}</div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center" *ngIf="!currentStep; else elseBlock">
+        <button class="btn btn-danger receipt-buttons m-4" (click)="startReceipt()">Start Receipt</button>
+      </div>
+      <ng-template #elseBlock>
+        <div class="d-flex justify-content-between p-2">
+          <div class="p-3">
+              <h2>Чекори</h2>
+              <h4>чекор: {{currentStep!.stepNumber}}</h4>
+              <h4>{{currentStep!.description}}</h4>
+              <div>
+                <button *ngIf="currentStep!.stepNumber - 1 > 0" class="btn btn-danger m-1 receipt-buttons" (click)="previousStep()">previous</button>
+                <button *ngIf="currentStep!.stepNumber + 1 <= this.receipt.steps.length; else confirmButton" class="btn btn-danger m-1 receipt-buttons" (click)="nextStep()">next</button>
+                <ng-template #confirmButton>
+                  <button class="btn btn-primary receipt-buttons">Validate</button>
+                </ng-template>
+              </div>
+          </div>
+          <div>
+            <img src="{{currentStep!.pictureUrl}}" height="200px"/>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="right-container px-5 pb-5">
+      <h3 class="text-center p-2">
+        Состојки
+      </h3>
+      <ng-container *ngIf="!currentStep; else currentStepDefined">
+        <ng-container *ngFor="let ingredientWithSize of receipt!.ingredients">
+          <div>
+            <img src="assets/images/check.png">{{ingredientWithSize.ingredient.name}} - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}
+          </div>
+        </ng-container>
+      </ng-container>
+      <ng-template #currentStepDefined>
+        <ng-container *ngFor="let ingredientWithSize of currentStep!.ingredientsUsed">
+          <div>
+            <img src="assets/images/check.png">{{ingredientWithSize.ingredient.name}} - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}
+          </div>
+        </ng-container>
+      </ng-template>
+    </div>
+  </div>
+</div>

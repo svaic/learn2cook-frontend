@@ -1,0 +1,15 @@
+.receipt-card {
+  min-width: 300px;
+  margin: 15px;
+}
+
+.receipt-image {
+  object-fit: cover;
+  height: 150px;
+}
+
+.receipt-bar {
+  background-color: #6F6B6B;
+  padding: 5px;
+  color: white;
+}

@@ -1,0 +1,14 @@
+<div class=" d-flex justify-content-center">
+  <div class="w-50 bg-white">
+    <div class="text-center p-2" style="background: grey">
+      Логирај се
+    </div>
+    <div class="p-3">
+      <label>username</label>
+      <input class="form-control" type="text" [(ngModel)]="username" name="username">
+      <label>password</label>
+      <input class="form-control" type="password" [(ngModel)]="password" name="password">
+      <button class="btn btn-danger mt-2 w-100" (click)="submitButtonClicked()">логирај се</button>
+    </div>
+  </div>
+</div>

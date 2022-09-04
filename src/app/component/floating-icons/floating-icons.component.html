@@ -1,0 +1,26 @@
+<div class="fridge-container">
+  <div class="d-flex align-items-start">
+    <img src="assets/images/fridge.png" (click)="fridgeClicked()"/>
+    <div class="bg-white fridge-content" *ngIf="showFridgePanel">
+      <div class="bg-danger p-2">Што имам во фрижидер</div>
+      <ul class="p-2">
+        <li><input type="checkbox">test</li>
+        <li><input type="checkbox">test</li>
+        <li><input type="checkbox">test</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="kitchen-container">
+  <div class="d-flex align-items-start flex-row-reverse">
+    <img src="assets/images/kitchen.png" (click)="kitchenClicked()">
+    <div class="bg-white kitchen-content" *ngIf="showKitchenPanel">
+      <div class="bg-danger p-2">Што имам во кујна</div>
+      <ul class="p-2">
+        <li><input type="checkbox">test</li>
+        <li><input type="checkbox">test</li>
+        <li><input type="checkbox">test</li>
+      </ul>
+    </div>
+  </div>
+</div>

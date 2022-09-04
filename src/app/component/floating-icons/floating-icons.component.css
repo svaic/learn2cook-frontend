@@ -1,0 +1,25 @@
+.fridge-container {
+  position: absolute;
+  left: 0;
+  top: 20%;
+}
+
+.fridge-content {
+  margin-left: -22px;
+  border: 1px solid black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.kitchen-container {
+  position: absolute;
+  right: 0;
+  top: 20%;
+}
+
+.kitchen-content {
+  margin-left: -22px;
+  border: 1px solid black;
+}
