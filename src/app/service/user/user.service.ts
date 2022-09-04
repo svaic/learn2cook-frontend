@@ -12,8 +12,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   login(request: LoginRequest) {
-    this.http.post<User>(environment.apiURL + "login", request)
-      .subscribe(x => console.log(x.fridgeItems),
-        (err: HttpErrorResponse) => console.log(err.status));
+    return this.http.post<User>(environment.apiURL + "login", request);
   }
 }

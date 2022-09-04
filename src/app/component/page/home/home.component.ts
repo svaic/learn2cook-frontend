@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReceiptService} from "../../../service/receipt/receipt.service";
 import {Receipt} from "../../../model/Receipt";
 
