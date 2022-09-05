@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {LoginRequest} from "../../model/LoginRequest";
 import {environment} from "../../../environments/environment";
 import {User} from "../../model/user/user";
@@ -13,5 +13,9 @@ export class UserService {
 
   login(request: LoginRequest) {
     return this.http.post<User>(environment.apiURL + "login", request);
+  }
+
+  register(request: LoginRequest) {
+    return this.http.post<User>(environment.apiURL + "register", request);
   }
 }

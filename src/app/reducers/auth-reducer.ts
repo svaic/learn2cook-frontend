@@ -1,8 +1,7 @@
 import {User} from "../model/user/user";
 import * as AuthActions from "./login-actions";
 import {createReducer, on} from "@ngrx/store";
-import {state} from "@angular/animations";
-import {reduce} from "rxjs";
+import {createRehydrateReducer} from "ngrx-rehydrate";
 
 export interface AuthState {
   currUser: User
@@ -12,8 +11,10 @@ export const initialState = {
   currUser: undefined
 }
 
-export const authReducer = createReducer(
+export const authReducer = createRehydrateReducer(
+  {key: 'UserKey'},
   initialState,
   on(AuthActions.doLoginSuccess, (state, user) => ({currUser: user})),
-  on(AuthActions.doLogout, () => ({currUser: undefined}))
+  on(AuthActions.doLogout, () => ({currUser: undefined})),
+  on(AuthActions.doRegisterSuccess, (state, user) => ({currUser: user})),
 )

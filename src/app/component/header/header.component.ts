@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Store} from "@ngrx/store";
+import {doLogout} from "../../reducers/login-actions";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  userState$ = this.store.select("auth");
+
+  constructor(private store: Store<{auth: any}>,  private _router: Router) { }
 
   ngOnInit(): void {
+    this.redirectToLogin();
+  }
+
+  logout() {
+    this.store.dispatch(doLogout());
+  }
+
+  redirectToLogin() {
+    this.userState$.subscribe(userState => {
+      if (!userState.currUser) {
+        this._router.navigateByUrl("/login");
+      }
+    })
   }
 
 }

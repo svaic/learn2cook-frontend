@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private _router: Router, private store: Store<{auth: any}>) { }
 
   ngOnInit(): void {
+    this.redirectToHome();
   }
 
   submitButtonClicked() {
@@ -26,11 +27,15 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
     this.store.dispatch(doLogin(loginRequest));
-    this.store.select("auth").subscribe(x=>{
-      if (x) {
-        this._router.navigateByUrl("/home")
+    }
+
+  redirectToHome() {
+    this.store.select("auth").subscribe(userPresent => {
+        if (userPresent.currUser) {
+          this._router.navigateByUrl("/home")
+        }
       }
-    });
+      );
   }
 
 }

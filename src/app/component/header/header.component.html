@@ -1,3 +1,13 @@
-<div class="header d-flex justify-content-center py-1">
+<div class="header d-flex justify-content-center align-items-center py-1">
   <img src="assets/images/header_logo.png"/>
+  <div class="header-buttons mx-2">
+    <ng-container *ngIf="(userState$ | async).currUser as user else registerButton">
+      <button class="btn btn-danger rounded-4" mx-1>Hello {{ user.username}}</button>
+      <button class="btn btn-danger rounded-4 mx-1"><label>{{user.points}} поени</label></button>
+      <button class="btn btn-danger rounded-4 mx-1" (click)="logout()">logout</button>
+    </ng-container>
+    <ng-template #registerButton>
+      <a routerLink="/register"><button class="btn btn-danger rounded-4" (click)="logout()">register</button></a>
+    </ng-template>
+  </div>
 </div>

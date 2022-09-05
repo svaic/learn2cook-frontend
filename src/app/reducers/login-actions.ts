@@ -7,6 +7,10 @@ export const DO_LOGIN_SUCCESS = "[Auth] login success";
 
 export const DO_LOGOUT = "[Auth] logout";
 
+export const DO_REGISTER = "[Auth] register";
+
+export const DO_REGISTER_SUCCESS = "[Auth] register success";
+
 export const doLogin = createAction(
   DO_LOGIN,
   props<{username: string, password: string}>()
@@ -18,5 +22,16 @@ export const doLoginSuccess = createAction(
 )
 
 export const doLogout = createAction(
-  DO_LOGOUT
+  DO_LOGOUT,
+  (payload: any = {}) => payload
+)
+
+export const doRegister = createAction(
+  DO_REGISTER,
+  props<{username: string, password: string}>()
+)
+
+export const doRegisterSuccess = createAction(
+  DO_REGISTER_SUCCESS,
+  props<any>()
 )

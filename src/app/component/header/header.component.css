@@ -2,3 +2,8 @@
   background-color: #80DAE0;
   margin-bottom: 60px;
 }
+
+.header-buttons {
+  position: absolute;
+  right: 0px;
+}

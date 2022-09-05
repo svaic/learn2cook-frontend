@@ -17,6 +17,7 @@ import { FloatingIconsComponent } from './component/floating-icons/floating-icon
 import {FormsModule} from "@angular/forms";
 import {authReducer} from "./reducers/auth-reducer";
 import {AuthEffects} from "./reducers/auth-effects";
+import { RegisterComponent } from './component/page/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AuthEffects} from "./reducers/auth-effects";
     ReceiptComponent,
     HeaderComponent,
     CookReceiptComponent,
-    FloatingIconsComponent
+    FloatingIconsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
