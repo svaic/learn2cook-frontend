@@ -3,7 +3,6 @@ import {IngredientWithSize} from "./IngredientWithSize";
 import {ReceiptDifficulty} from "./enumerable/ReceiptDifficulty";
 import {Step} from "./Step";
 import {ReceiptType} from "./enumerable/ReceiptType";
-import {Duration} from "tinyduration";
 
 export interface Receipt {
   id: number,
