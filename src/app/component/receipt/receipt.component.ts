@@ -13,6 +13,5 @@ export class ReceiptComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.receipt);
   }
 }

@@ -1,10 +1,10 @@
 import {Action, createAction, props} from "@ngrx/store";
 
-export const GET_RECIPES = '[Task] Get Tasks';
+export const GET_RECIPES = '[RECIPES] Get RECIPES';
 
-export const GET_RECIPES_SUCCESS = '[Task] Get RECIPES Success';
+export const GET_RECIPES_SUCCESS = '[RECIPES] Get RECIPES Success';
 
-export const GET_RECIPES_FAILURE = '[Task] Get RECIPES Failure';
+export const GET_RECIPES_FAILURE = '[RECIPES] Get RECIPES Failure';
 
 export const getRecipes = createAction(
   GET_RECIPES

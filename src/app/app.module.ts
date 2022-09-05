@@ -30,7 +30,7 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({receiptReducer}, {}),
+    StoreModule.forRoot({store: receiptReducer}, {}),
     EffectsModule.forRoot([ReceiptEffects]),
     AppRoutingModule
   ],
