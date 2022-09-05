@@ -10,6 +10,7 @@ export interface Receipt {
   category: FoodCategory,
   ingredients: Array<IngredientWithSize>,
   kitchenEquipment: IngredientWithSize,
+  pictureUrl: string
   steps: Array<Step>,
   timeToPrepare: any,
   difficulty: ReceiptDifficulty,

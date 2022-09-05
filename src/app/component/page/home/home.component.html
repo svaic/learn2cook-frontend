@@ -4,7 +4,7 @@
     <div class="recipes-container">
     <ng-container *ngIf="recipes$ | async as recipes">
       <div class="d-flex flex-wrap justify-content-between">
-        <a [routerLink]="['/receipt',receipt.id]" *ngFor="let receipt of recipes">
+        <a [routerLink]="['/receipt',i]" *ngFor="let receipt of recipes;let i=index">
           <app-receipt  [receipt]="receipt"></app-receipt>
         </a>
       </div>

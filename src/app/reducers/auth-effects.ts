@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {act, Actions, createEffect, ofType} from "@ngrx/effects";
+import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {UserService} from "../service/user/user.service";
-import {getRecipes, getRecipesFailure} from "./receipt-actions";
+import {getRecipesFailure} from "./receipt-actions";
 import {DO_LOGIN, DO_LOGOUT, DO_REGISTER, doLogin, doLoginSuccess, doRegisterSuccess} from "./login-actions";
 import {catchError, map, mergeMap, of, tap} from "rxjs";
 import {User} from "../model/user/user";
@@ -19,14 +19,21 @@ export class AuthEffects {
   getRecipes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DO_LOGIN),
-      mergeMap((action: {username: string, password: string}) => this.userService.login(action).pipe(map((response: User) => doLoginSuccess(response)),
+      mergeMap((action: {username: string, password: string}) => this.userService.login(action)
+        .pipe(
+          map((response: User) => doLoginSuccess(response)),
+            tap(x=>this._router.navigateByUrl("/home")),
         catchError((error: any) => of(getRecipesFailure(error))))
       )));
 
   doRegister$ = createEffect(() =>
     this.actions$.pipe(
       ofType(DO_REGISTER),
-      mergeMap((action: {username: string, password: string}) => this.userService.register(action).pipe(map((response: User) => doRegisterSuccess(response)),
+      mergeMap((action: {username: string, password: string}) =>
+        this.userService.register(action)
+          .pipe(
+            map((response: User) => doRegisterSuccess(response)),
+            tap(x=>this._router.navigateByUrl("/home")),
         catchError((error: any) => of(getRecipesFailure(error))))
       )));
 
