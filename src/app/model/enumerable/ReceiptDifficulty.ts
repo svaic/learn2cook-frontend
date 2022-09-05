@@ -1,5 +1,5 @@
 export enum ReceiptDifficulty {
-  EASY="лесно",
-  MEDIUM="medium",
-  HARD="hard"
+  EASY="EASY",
+  MEDIUM="MEDIUM",
+  HARD="HARD"
 }

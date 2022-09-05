@@ -14,8 +14,8 @@
           <div>{{receipt.timeToPrepare}}</div>
         </div>
         <div class="details-item text-center">
-          <img src="assets/images/difficulty.png">
-          <div>тежина: {{receipt.difficulty.toString()}}</div>
+          <img src="assets/images/difficulty/{{getDifficulty().picture}}" height="42px">
+          <div>тежина: {{getDifficulty().value}}</div>
         </div>
         <div class="details-item">
           <img src="assets/images/check.png"/>

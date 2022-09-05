@@ -4,6 +4,7 @@ import {Receipt} from "../../../model/Receipt";
 import {ReceiptService} from "../../../service/receipt/receipt.service";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
+import {mapDifficulty, ReceiptDifficultyData} from "../../../utility/utility";
 
 @Component({
   selector: 'app-cook-receipt',
@@ -35,6 +36,10 @@ export class CookReceiptComponent implements OnInit {
   previousStep() {
     let prevStep = this.currentStep!.stepNumber - 1;
     this.currentStep = this.receipt.steps[prevStep-1];
+  }
+
+  getDifficulty(): ReceiptDifficultyData {
+    return mapDifficulty[this.receipt.difficulty];
   }
 
   ngOnInit(): void {
