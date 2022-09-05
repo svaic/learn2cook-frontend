@@ -4,7 +4,7 @@ import {Receipt} from "../../../model/Receipt";
 import {ReceiptService} from "../../../service/receipt/receipt.service";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {mapDifficulty, ReceiptDifficultyData} from "../../../utility/utility";
+import {mapDifficulty, parseDuration, ReceiptDifficultyData} from "../../../utility/utility";
 
 @Component({
   selector: 'app-cook-receipt',
@@ -40,6 +40,10 @@ export class CookReceiptComponent implements OnInit {
 
   getDifficulty(): ReceiptDifficultyData {
     return mapDifficulty[this.receipt.difficulty];
+  }
+
+  getDuration(duration: string) {
+    return parseDuration(duration);
   }
 
   ngOnInit(): void {
