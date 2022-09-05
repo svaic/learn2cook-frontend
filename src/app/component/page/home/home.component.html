@@ -2,13 +2,12 @@
   <app-floating-icons></app-floating-icons>
   <div class="home-bar text-center w-100 p-2">Време е за готвење</div>
     <div class="recipes-container">
-    <ng-container *ngIf="recipes">
+    <ng-container *ngIf="recipes$ | async as recipes">
       <div class="d-flex flex-wrap justify-content-between">
         <a [routerLink]="['/receipt',receipt.id]" *ngFor="let receipt of recipes">
           <app-receipt  [receipt]="receipt"></app-receipt>
         </a>
       </div>
-      <button (click)="click()"></button>
     </ng-container>
   </div>
 </div>

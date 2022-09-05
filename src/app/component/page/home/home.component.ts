@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ReceiptService} from "../../../service/receipt/receipt.service";
 import {Receipt} from "../../../model/Receipt";
 import {Store} from "@ngrx/store";
-import {GET_RECIPES, getRecipes} from "../../../reducers/rceipt-actions";
+import {GET_RECIPES, getRecipes} from "../../../reducers/receipt-actions";
+import {map, Observable} from "rxjs";
+import {State} from "../../../reducers/receipt-reducer";
 
 @Component({
   selector: 'app-home',
@@ -11,18 +13,10 @@ import {GET_RECIPES, getRecipes} from "../../../reducers/rceipt-actions";
 })
 export class HomeComponent implements OnInit {
 
-  public recipes: Array<Receipt> | undefined;
-  constructor(private receiptService: ReceiptService, private store: Store) { }
+  recipes$: Observable<Receipt[]> = this.store.select(x=>x.receipt.recipes);
+  constructor(private receiptService: ReceiptService, private store: Store<{receipt: State}>) { }
 
   ngOnInit(): void {
-    this.store.select(state => state).subscribe(x=> console.log(x));
-    this.receiptService.getRecipes()
-      .subscribe(x => {
-        this.recipes = Array(10).fill(x.recipes[0]);
-      });
-  }
-
-  click() {
     this.store.dispatch(getRecipes());
   }
 }

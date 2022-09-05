@@ -3,11 +3,13 @@
     <img src="assets/images/fridge.png" (click)="fridgeClicked()"/>
     <div class="bg-white fridge-content" *ngIf="showFridgePanel">
       <div class="bg-danger p-2">Што имам во фрижидер</div>
-      <ul class="p-2">
-        <li><input type="checkbox">test</li>
-        <li><input type="checkbox">test</li>
-        <li><input type="checkbox">test</li>
-      </ul>
+      <ng-container *ngIf="currUser$ | async as user">
+        <ul class="p-2">
+          <ng-container *ngFor="let item of user.fridgeItems">
+              <li><input type="checkbox" checked>{{item.ingredient.name}}</li>
+          </ng-container>
+        </ul>
+      </ng-container>
     </div>
   </div>
 </div>

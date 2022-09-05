@@ -15,6 +15,8 @@ import {ReceiptEffects} from "./reducers/receipt-effects";
 import {receiptReducer} from "./reducers/receipt-reducer";
 import { FloatingIconsComponent } from './component/floating-icons/floating-icons.component';
 import {FormsModule} from "@angular/forms";
+import {authReducer} from "./reducers/auth-reducer";
+import {AuthEffects} from "./reducers/auth-effects";
 
 @NgModule({
   declarations: [
@@ -30,8 +32,8 @@ import {FormsModule} from "@angular/forms";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({store: receiptReducer}, {}),
-    EffectsModule.forRoot([ReceiptEffects]),
+    StoreModule.forRoot({receipt: receiptReducer, auth: authReducer}, {}),
+    EffectsModule.forRoot([ReceiptEffects, AuthEffects]),
     AppRoutingModule
   ],
   providers: [],

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable, tap} from "rxjs";
+import {User} from "../../model/user/user";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-floating-icons',
@@ -7,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FloatingIconsComponent implements OnInit {
 
+  currUser$: Observable<User> = this.store.select(x=>x.auth.currUser);
   public showFridgePanel: boolean = false;
   public showKitchenPanel: boolean = false;
 
-  constructor() { }
+  constructor(private store: Store<{auth: any}>) { }
 
   ngOnInit(): void {
   }
