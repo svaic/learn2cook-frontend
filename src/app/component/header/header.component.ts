@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {doLogout} from "../../reducers/auth-actions";
+import {doLogout} from "../../state-managment/auth/auth-actions";
 import {Router} from "@angular/router";
 
 @Component({

@@ -1,8 +1,8 @@
 import {createAction, props, Store} from "@ngrx/store";
-import {Ingredient} from "../model/Ingredient";
-import {User} from "../model/user/user";
-import {IngredientType} from "../model/enumerable/IngredientType";
+import {User} from "../../model/user/user";
+import {IngredientType} from "../../model/enumerable/IngredientType";
 import {map} from "rxjs";
+import {IngredientCard, IngredientState} from "./ingredients-reducer";
 
 export const GET_INGREDIENTS = "[ING] get fridge";
 
@@ -13,15 +13,6 @@ export const ADD_INGREDIENTS = "[ING] add to fridge";
 export const REMOVE_INGREDIENTS = "[ING] remove from fridge";
 
 export const CHANGE_INGREDIENT = "[ING] change ingredient";
-
-export interface IngredientCard {
-  ingredient: Ingredient,
-  inCard: boolean
-}
-
-export interface IngredientState {
-  cards: IngredientCard[],
-}
 
 export const getPipeForItems = (store: Store<{ ingredient: any }>, type: IngredientType) =>
   store.select("ingredient")

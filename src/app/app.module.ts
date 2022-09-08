@@ -11,15 +11,15 @@ import {ReceiptComponent} from './component/receipt/receipt.component';
 import {HeaderComponent} from './component/header/header.component';
 import {CookReceiptComponent} from './component/page/cook-receipt/cook-receipt.component';
 import {EffectsModule} from "@ngrx/effects";
-import {ReceiptEffects} from "./reducers/receipt-effects";
-import {receiptReducer} from "./reducers/receipt-reducer";
+import {ReceiptEffects} from "./state-managment/receipt/receipt-effects";
+import {receiptReducer} from "./state-managment/receipt/receipt-reducer";
 import {FloatingIconsComponent} from './component/floating-icons/floating-icons.component';
 import {FormsModule} from "@angular/forms";
-import {authReducer} from "./reducers/auth-reducer";
-import {AuthEffects} from "./reducers/auth-effects";
+import {authReducer} from "./state-managment/auth/auth-reducer";
+import {AuthEffects} from "./state-managment/auth/auth-effects";
 import {RegisterComponent} from './component/page/register/register.component';
-import {ingredientsReducer} from "./reducers/ingredients-reducer";
-import {IngredientsEffects} from "./reducers/ingredients-effects";
+import {ingredientsReducer} from "./state-managment/ingredients/ingredients-reducer";
+import {IngredientsEffects} from "./state-managment/ingredients/ingredients-effects";
 
 @NgModule({
   declarations: [

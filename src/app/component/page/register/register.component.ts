@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {doRegister} from "../../../reducers/auth-actions";
+import {doRegister} from "../../../state-managment/auth/auth-actions";
 
 @Component({
   selector: 'app-register',

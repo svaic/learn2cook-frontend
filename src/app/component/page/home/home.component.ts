@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ReceiptService} from "../../../service/receipt/receipt.service";
 import {Receipt} from "../../../model/Receipt";
 import {Store} from "@ngrx/store";
-import {GET_RECIPES, getRecipes} from "../../../reducers/receipt-actions";
-import {map, Observable} from "rxjs";
-import {State} from "../../../reducers/receipt-reducer";
+import {getRecipes} from "../../../state-managment/receipt/receipt-actions";
+import {Observable} from "rxjs";
+import {State} from "../../../state-managment/receipt/receipt-reducer";
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,10 @@ import {State} from "../../../reducers/receipt-reducer";
 })
 export class HomeComponent implements OnInit {
 
-  recipes$: Observable<Receipt[]> = this.store.select(x=>x.receipt.recipes);
-  constructor(private receiptService: ReceiptService, private store: Store<{receipt: State}>) { }
+  recipes$: Observable<Receipt[]> = this.store.select(x => x.receipt.recipes);
+
+  constructor(private receiptService: ReceiptService, private store: Store<{ receipt: State }>) {
+  }
 
   ngOnInit(): void {
     this.store.dispatch(getRecipes());

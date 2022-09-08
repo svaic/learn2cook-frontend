@@ -3,7 +3,7 @@ import {UserService} from "../../../service/user/user.service";
 import {LoginRequest} from "../../../model/LoginRequest";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {doLogin} from "../../../reducers/auth-actions";
+import {doLogin} from "../../../state-managment/auth/auth-actions";
 
 @Component({
   selector: 'app-login',

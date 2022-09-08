@@ -1,6 +1,15 @@
 import {createReducer, on} from "@ngrx/store";
-import * as ingredientsActions from '../reducers/ingredients-actions'
-import {IngredientCard, IngredientState} from './ingredients-actions'
+import * as ingredientsActions from './/ingredients-actions'
+import {Ingredient} from "../../model/Ingredient";
+
+export interface IngredientCard {
+  ingredient: Ingredient,
+  inCard: boolean
+}
+
+export interface IngredientState {
+  cards: IngredientCard[],
+}
 
 export const initialState: IngredientState = {
   cards: [],

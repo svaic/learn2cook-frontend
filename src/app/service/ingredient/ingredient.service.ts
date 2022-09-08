@@ -4,8 +4,8 @@ import {IngredientWithSize} from "../../model/IngredientWithSize";
 import {environment} from "../../../environments/environment";
 import {map, Observable} from "rxjs";
 import {Ingredient} from "../../model/Ingredient";
-import {IngredientCard} from "../../reducers/ingredients-actions";
 import {IngredientSizeType} from "../../model/enumerable/IngredientSizeType";
+import {IngredientCard} from "../../state-managment/ingredients/ingredients-reducer";
 
 @Injectable({
   providedIn: 'root'

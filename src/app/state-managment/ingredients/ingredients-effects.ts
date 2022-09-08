@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
-import {IngredientService} from "../service/ingredient/ingredient.service";
+import {IngredientService} from "../../service/ingredient/ingredient.service";
 import {map, mergeMap, tap} from "rxjs";
-import {changeIngredientStatus, getIngredients, getIngredientsSuccess, IngredientState} from "./ingredients-actions";
-import {Ingredient} from "../model/Ingredient";
+import {changeIngredientStatus, getIngredients, getIngredientsSuccess} from "./ingredients-actions";
+import {Ingredient} from "../../model/Ingredient";
+import {IngredientState} from "./ingredients-reducer";
 
 @Injectable()
 export class IngredientsEffects {

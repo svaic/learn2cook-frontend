@@ -1,7 +1,7 @@
-import {User} from "../model/user/user";
 import * as AuthActions from "./auth-actions";
 import {on} from "@ngrx/store";
 import {createRehydrateReducer} from "ngrx-rehydrate";
+import {User} from "../../model/user/user";
 
 export interface AuthState {
   currUser: User

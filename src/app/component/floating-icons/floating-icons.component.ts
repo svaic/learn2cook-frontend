@@ -5,11 +5,10 @@ import {
   changeIngredientStatus,
   getIngredients,
   getPipeForItems,
-  IngredientCard,
-  IngredientState
-} from "../../reducers/ingredients-actions";
+} from "../../state-managment/ingredients/ingredients-actions";
 import {IngredientType} from "../../model/enumerable/IngredientType";
 import {IngredientWithSize} from "../../model/IngredientWithSize";
+import {IngredientCard, IngredientState} from "../../state-managment/ingredients/ingredients-reducer";
 
 @Component({
   selector: 'app-floating-icons',
@@ -42,7 +41,6 @@ export class FloatingIconsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.subscribe(x => console.log(x));
   }
 
   fridgeClicked() {
