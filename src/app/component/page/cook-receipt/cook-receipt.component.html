@@ -1,6 +1,6 @@
-<div class="container-lg receipt-container position-relative">
+<div class="container-lg receipt-container position-relative" *ngIf="receipt$ | async as receipt">
   <img src="{{receipt.pictureUrl}}"
-       class="main-image" *ngIf="receipt"/>
+       class="main-image"/>
   <div>
     <a routerLink="/home">
       <img src="assets/images/back.png" class="position-absolute top-0 start-0 translate-middle"/>
@@ -14,8 +14,8 @@
           <div>{{getDuration(receipt.timeToPrepare)}} минути</div>
         </div>
         <div class="details-item text-center">
-          <img src="assets/images/difficulty/{{getDifficulty().picture}}" height="42px">
-          <div>тежина: {{getDifficulty().value}}</div>
+          <img src="assets/images/difficulty/{{getDifficulty(receipt.difficulty).picture}}" height="42px">
+          <div>тежина: {{getDifficulty(receipt.difficulty).value}}</div>
         </div>
         <div class="details-item">
           <img src="assets/images/circle/green-check.png" height="60px"/>
