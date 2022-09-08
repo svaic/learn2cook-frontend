@@ -1,9 +1,9 @@
 import {Ingredient} from "./Ingredient";
-import {IngredientType} from "./enumerable/IngredientType";
+import {IngredientSizeType} from "./enumerable/IngredientSizeType";
 
 export interface IngredientWithSize {
-  id: number,
+  id?: number,
   ingredient: Ingredient,
   count: number,
-  sizeType: IngredientType
+  sizeType: IngredientSizeType
 }

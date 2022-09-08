@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../service/user/user.service";
 import {LoginRequest} from "../../../model/LoginRequest";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {doLogin} from "../../../reducers/login-actions";
+import {doLogin} from "../../../reducers/auth-actions";
 
 @Component({
   selector: 'app-login',

@@ -1,6 +1,6 @@
 import {User} from "../model/user/user";
-import * as AuthActions from "./login-actions";
-import {createReducer, on} from "@ngrx/store";
+import * as AuthActions from "./auth-actions";
+import {on} from "@ngrx/store";
 import {createRehydrateReducer} from "ngrx-rehydrate";
 
 export interface AuthState {
