@@ -16,9 +16,20 @@ export const CHANGE_INGREDIENT = "[ING] change ingredient";
 
 export const getPipeForItems = (store: Store<{ ingredient: any }>, type: IngredientType) =>
   store.select("ingredient")
-    .pipe(map((state: IngredientState) =>
-      ({cards: state.cards.filter((x: IngredientCard) => x.ingredient.type == type)})
-    ));
+    .pipe(
+      map((state: IngredientState) =>
+        ({cards: state.cards.filter((x: IngredientCard) => x.ingredientWithSize.ingredient.type == type)})),
+      map(x => ({...x, ...x.cards.sort(compare)})));
+
+function compare(a: IngredientCard, b: IngredientCard) {
+  if (a.ingredientWithSize.id < b.ingredientWithSize.id) {
+    return -1;
+  }
+  if (a.ingredientWithSize.id > b.ingredientWithSize.id) {
+    return 1;
+  }
+  return 0;
+}
 
 export const getIngredients = createAction(
   GET_INGREDIENTS,

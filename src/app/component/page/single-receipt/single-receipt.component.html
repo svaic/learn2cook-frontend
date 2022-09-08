@@ -52,20 +52,17 @@
       <h2 class="text-center p-2 text-white">
         {{receipt.name}} Состојки
       </h2>
-      <ng-container *ngIf="!currentStep; else currentStepDefined">
-        <ng-container *ngFor="let ingredientWithSize of receipt!.ingredients">
-          <div class="text-white">
-            <img class="m-1" src="assets/images/circle/green-check.png" height="35px">{{ingredientWithSize.ingredient.name}} - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}
+      <ng-container>
+        <ng-container
+          *ngFor="let ingredientWithSize of (currentStep ? currentStep.ingredientsUsed : receipt!.ingredients)">
+          <div class="text-white d-flex justify-content-between align-items-center">
+            <img class="m-1" src="assets/images/circle/green-check.png" height="35px">
+            <span class="w-100">{{ingredientWithSize.ingredient.name}}
+              - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}</span>
+            <img src="{{ingredientWithSize.ingredient.pictureUrl}}" width="50px"/>
           </div>
         </ng-container>
       </ng-container>
-      <ng-template #currentStepDefined>
-        <ng-container *ngFor="let ingredientWithSize of currentStep!.ingredientsUsed">
-          <div class="text-white">
-            <img class="m-1" src="assets/images/circle/green-check.png" height="35px">{{ingredientWithSize.ingredient.name}} - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}
-          </div>
-        </ng-container>
-      </ng-template>
     </div>
   </div>
 </div>

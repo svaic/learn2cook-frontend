@@ -3,9 +3,10 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {IngredientService} from "../../service/ingredient/ingredient.service";
 import {map, mergeMap} from "rxjs";
 import {changeIngredientStatus, getIngredients, getIngredientsSuccess} from "./ingredients-actions";
-import {Ingredient} from "../../model/Ingredient";
 import {IngredientState} from "./ingredients-reducer";
 import {toIngredientCard} from "../../utility/utility";
+import {IngredientWithSize} from "../../model/IngredientWithSize";
+import {updateUserData} from "../auth/auth-actions";
 
 @Injectable()
 export class IngredientsEffects {
@@ -22,7 +23,7 @@ export class IngredientsEffects {
         map(notHave => {
           return ({
             cards: [
-              ...payload.have.map((x: Ingredient) => toIngredientCard(x, true)),
+              ...payload.have.map((x: IngredientWithSize) => toIngredientCard(x, true)),
               ...notHave.map(x => toIngredientCard(x, false))]
           } as IngredientState);
         }),
@@ -31,14 +32,13 @@ export class IngredientsEffects {
       )
     ));
 
-  addIngredient$ = createEffect(() => {
-      return this.actions$.pipe(ofType(changeIngredientStatus),
-        map((payload) =>
-          this.ingredientsService
-            .changeIngredientStateValue(payload.card.ingredient, payload.currUser.username)
-            .subscribe(x => x)
-        ),
-      );
-    }, {dispatch: false}
+  addIngredient$ = createEffect(() =>
+    this.actions$.pipe(ofType(changeIngredientStatus),
+      mergeMap((payload) =>
+        this.ingredientsService
+          .changeIngredientStateValue(payload.card, payload.currUser.username)
+          .pipe(map((x) => updateUserData(x)))
+      ),
+    )
   )
 }

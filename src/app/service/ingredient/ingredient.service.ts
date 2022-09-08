@@ -3,8 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {IngredientWithSize} from "../../model/IngredientWithSize";
 import {environment} from "../../../environments/environment";
 import {map, Observable} from "rxjs";
-import {Ingredient} from "../../model/Ingredient";
-import {toIngredientWithSize} from "../../utility/utility";
+import {IngredientCard} from "../../state-managment/ingredients/ingredients-reducer";
+import {ChangeUserIngredientRequest} from "../../model/response/ChangeUserIngredientRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +14,15 @@ export class IngredientService {
   constructor(private http: HttpClient) {
   }
 
-  getAllIngredients(filterArr: Ingredient[] = []): Observable<Array<Ingredient>> {
+  getAllIngredients(filterArr: IngredientWithSize[] = []): Observable<Array<IngredientWithSize>> {
     return this.http.get<Array<IngredientWithSize>>(environment.apiURL + 'ingredients')
       .pipe(
-        map(x => x.map(y => y.ingredient)),
         map(AllElem => AllElem.filter(elem => !filterArr.find(filterElem => filterElem.id === elem.id))),
       );
   }
 
-  changeIngredientStateValue(ingredient: Ingredient, username: string) {
-    return this.http.post(environment.apiURL + username, toIngredientWithSize(ingredient));
+  changeIngredientStateValue(card: IngredientCard, username: string) {
+    const body: ChangeUserIngredientRequest = {ingredient: card.ingredientWithSize, addIngredient: !card.inCard};
+    return this.http.post(environment.apiURL + username, body);
   }
 }

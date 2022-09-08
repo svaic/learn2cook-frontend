@@ -7,7 +7,6 @@ import {
   getPipeForItems,
 } from "../../state-managment/ingredients/ingredients-actions";
 import {IngredientType} from "../../model/enumerable/IngredientType";
-import {IngredientWithSize} from "../../model/IngredientWithSize";
 import {IngredientCard, IngredientState} from "../../state-managment/ingredients/ingredients-reducer";
 
 @Component({
@@ -26,13 +25,14 @@ export class FloatingIconsComponent implements OnInit {
   constructor(private store: Store<{ auth: any, ingredient: any }>) {
 
     this.store.select(store => store.auth.currUser).subscribe(user => {
+        if (user) {
+          this.store.dispatch(
+            getIngredients(
+              {have: (user.kitchenItems.concat(user.fridgeItems))})
+          );
 
-        this.store.dispatch(
-          getIngredients(
-            {have: (user.kitchenItems.concat(user.fridgeItems)).map((x: IngredientWithSize) => x.ingredient)})
-        );
-
-        this.user = user;
+          this.user = user;
+        }
       }
     );
 

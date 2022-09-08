@@ -15,6 +15,7 @@ export const authReducer = createRehydrateReducer(
   {key: 'UserKey'},
   initialState,
   on(AuthActions.doLoginSuccess, (state, user) => ({currUser: user})),
-  on(AuthActions.doLogout, () => ({currUser: undefined})),
+  on(AuthActions.updateUserData, (state, user) => ({currUser: user})),
+  on(AuthActions.doLogout, () => (initialState)),
   on(AuthActions.doRegisterSuccess, (state, user) => ({currUser: user})),
 )

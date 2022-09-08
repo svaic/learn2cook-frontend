@@ -51,6 +51,14 @@ export class SingleReceipt implements OnInit {
     return parseDuration(duration);
   }
 
+  /*
+    getIngredients() {
+      if (this.currentStep) {
+        return this.currentStep.ingredientsUsed;
+      }*/
+
+  //}
+
   ngOnInit(): void {
   }
 

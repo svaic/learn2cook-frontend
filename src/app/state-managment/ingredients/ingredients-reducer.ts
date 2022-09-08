@@ -1,9 +1,9 @@
 import {createReducer, on} from "@ngrx/store";
 import * as ingredientsActions from './/ingredients-actions'
-import {Ingredient} from "../../model/Ingredient";
+import {IngredientWithSize} from "../../model/IngredientWithSize";
 
 export interface IngredientCard {
-  ingredient: Ingredient,
+  ingredientWithSize: IngredientWithSize,
   inCard: boolean
 }
 
@@ -20,12 +20,12 @@ export const ingredientsReducer = createReducer(
   on(ingredientsActions.getIngredientsSuccess, (state, ingredients: IngredientState) => ingredients),
   on(ingredientsActions.addIngredient,
     (state, ingredientCard: IngredientCard) => {
-      return !state.cards.find(x => x.ingredient.id === ingredientCard.ingredient.id) ?
+      return !state.cards.find(x => x.ingredientWithSize.ingredient.id === ingredientCard.ingredientWithSize.id) ?
         {...state, cards: [...state.cards, ingredientCard]} : state;
     }),
   on(ingredientsActions.changeIngredientStatus,
     (state, payload) => {
-      const cards = state.cards.map((value) => value.ingredient.id === payload.card.ingredient.id ? {
+      const cards = state.cards.map((value) => value.ingredientWithSize.ingredient.id === payload.card.ingredientWithSize.ingredient.id ? {
         ...value,
         inCard: !value.inCard
       } : value);

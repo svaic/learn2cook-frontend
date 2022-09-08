@@ -10,7 +10,7 @@
 }
 
 .left-container {
-  flex-grow: 4;
+  width: 65%;
 }
 
 .receipt-buttons {
@@ -18,7 +18,7 @@
 }
 
 .right-container {
-  flex-grow: 2;
+  width: 35%;
   background-color: #A5A5A5;
 }
 

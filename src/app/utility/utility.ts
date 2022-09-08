@@ -24,10 +24,10 @@ export const parseDuration = (duration: string) => {
   return moment.duration(duration).asMinutes();
 }
 
-export const toIngredientCard = (ingredient: Ingredient, inCard: boolean): IngredientCard => {
-  return {ingredient, inCard};
+export const toIngredientCard = (ingredient: IngredientWithSize, inCard: boolean): IngredientCard => {
+  return {ingredientWithSize: ingredient, inCard};
 }
 
 export const toIngredientWithSize = (ingredient: Ingredient): IngredientWithSize => {
-  return {ingredient: ingredient, count: 1, sizeType: IngredientSizeType.X};
+  return {id: -1, ingredient: ingredient, count: 1, sizeType: IngredientSizeType.X};
 }

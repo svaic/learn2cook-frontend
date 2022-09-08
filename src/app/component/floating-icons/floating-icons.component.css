@@ -2,24 +2,33 @@
   position: absolute;
   left: 0;
   top: 20%;
+  z-index: 1000;
 }
 
 .fridge-content {
   margin-left: -22px;
-  border: 1px solid black;
+  border: 1px solid white;
+  width: 200px;
 }
 
 ul {
   list-style-type: none;
 }
 
+.scroll-container {
+  padding: 5px;
+  max-height: 200px;
+}
+
 .kitchen-container {
   position: absolute;
   right: 0;
   top: 20%;
+  z-index: 1000;
 }
 
 .kitchen-content {
   margin-left: -22px;
-  border: 1px solid black;
+  border: 1px solid white;
+  width: 200px;
 }
