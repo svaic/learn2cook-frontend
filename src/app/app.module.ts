@@ -7,9 +7,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './component/page/home/home.component';
 import {LoginComponent} from './component/page/login/login.component';
-import {ReceiptComponent} from './component/receipt/receipt.component';
 import {HeaderComponent} from './component/header/header.component';
-import {CookReceiptComponent} from './component/page/cook-receipt/cook-receipt.component';
+import {SingleReceipt} from './component/page/single-receipt/single-receipt.component';
 import {EffectsModule} from "@ngrx/effects";
 import {ReceiptEffects} from "./state-managment/receipt/receipt-effects";
 import {receiptReducer} from "./state-managment/receipt/receipt-reducer";
@@ -20,15 +19,16 @@ import {AuthEffects} from "./state-managment/auth/auth-effects";
 import {RegisterComponent} from './component/page/register/register.component';
 import {ingredientsReducer} from "./state-managment/ingredients/ingredients-reducer";
 import {IngredientsEffects} from "./state-managment/ingredients/ingredients-effects";
+import {SmallReceiptCardComponent} from "./component/page/home/small-receipt-card/small-receipt-card.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ReceiptComponent,
+    SmallReceiptCardComponent,
     HeaderComponent,
-    CookReceiptComponent,
+    SingleReceipt,
     FloatingIconsComponent,
     RegisterComponent
   ],

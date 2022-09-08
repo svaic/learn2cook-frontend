@@ -1,17 +1,18 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Receipt} from "../../model/Receipt";
-import {mapDifficulty, parseDuration, ReceiptDifficultyData} from "../../utility/utility";
+import {Receipt} from "../../../../model/Receipt";
+import {mapDifficulty, parseDuration, ReceiptDifficultyData} from "../../../../utility/utility";
 
 @Component({
   selector: 'app-receipt',
-  templateUrl: './receipt.component.html',
-  styleUrls: ['./receipt.component.css']
+  templateUrl: './small-receipt-card.component.html',
+  styleUrls: ['./small-receipt-card.component.css']
 })
-export class ReceiptComponent implements OnChanges {
+export class SmallReceiptCardComponent implements OnChanges {
 
   @Input() receipt!: Receipt;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
   }

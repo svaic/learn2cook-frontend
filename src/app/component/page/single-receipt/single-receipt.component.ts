@@ -10,10 +10,10 @@ import {ReceiptDifficulty} from "../../../model/enumerable/ReceiptDifficulty";
 
 @Component({
   selector: 'app-cook-receipt',
-  templateUrl: './cook-receipt.component.html',
-  styleUrls: ['./cook-receipt.component.css']
+  templateUrl: './single-receipt.component.html',
+  styleUrls: ['./single-receipt.component.css']
 })
-export class CookReceiptComponent implements OnInit {
+export class SingleReceipt implements OnInit {
 
   receipt$: Observable<Receipt>;
   currentStep: Step | undefined;
