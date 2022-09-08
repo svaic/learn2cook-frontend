@@ -1,13 +1,20 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {IngredientService} from "../../service/ingredient/ingredient.service";
-import {map, mergeMap, tap} from "rxjs";
+import {map, mergeMap} from "rxjs";
 import {changeIngredientStatus, getIngredients, getIngredientsSuccess} from "./ingredients-actions";
 import {Ingredient} from "../../model/Ingredient";
 import {IngredientState} from "./ingredients-reducer";
+import {toIngredientCard} from "../../utility/utility";
 
 @Injectable()
 export class IngredientsEffects {
+
+  constructor(
+    private actions$: Actions,
+    private ingredientsService: IngredientService,
+  ) {
+  }
 
   getIngredients$ = createEffect(() =>
     this.actions$.pipe(ofType(getIngredients),
@@ -15,29 +22,23 @@ export class IngredientsEffects {
         map(notHave => {
           return ({
             cards: [
-              ...payload.have.map((x: Ingredient) => this.ingredientsService.toIngredientCard(x, true)),
-              ...notHave.map(x => this.ingredientsService.toIngredientCard(x, false))]
+              ...payload.have.map((x: Ingredient) => toIngredientCard(x, true)),
+              ...notHave.map(x => toIngredientCard(x, false))]
           } as IngredientState);
         }),
         map(ingredientState => getIngredientsSuccess(ingredientState)),
         )
       )
     ));
+
   addIngredient$ = createEffect(() => {
       return this.actions$.pipe(ofType(changeIngredientStatus),
-        tap((payload) => {
-            this.ingredientsService
-              .changeIngredientStateValue(payload.card.ingredient, payload.currUser.username)
-              .subscribe(x => console.log(x));
-          }
+        map((payload) =>
+          this.ingredientsService
+            .changeIngredientStateValue(payload.card.ingredient, payload.currUser.username)
+            .subscribe(x => x)
         ),
       );
     }, {dispatch: false}
   )
-
-  constructor(
-    private actions$: Actions,
-    private ingredientsService: IngredientService,
-  ) {
-  }
 }

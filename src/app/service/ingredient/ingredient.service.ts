@@ -4,8 +4,7 @@ import {IngredientWithSize} from "../../model/IngredientWithSize";
 import {environment} from "../../../environments/environment";
 import {map, Observable} from "rxjs";
 import {Ingredient} from "../../model/Ingredient";
-import {IngredientSizeType} from "../../model/enumerable/IngredientSizeType";
-import {IngredientCard} from "../../state-managment/ingredients/ingredients-reducer";
+import {toIngredientWithSize} from "../../utility/utility";
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +23,6 @@ export class IngredientService {
   }
 
   changeIngredientStateValue(ingredient: Ingredient, username: string) {
-    return this.http.post(environment.apiURL + username, this.toIngredientWithSize(ingredient));
-  }
-
-
-  toIngredientCard(ingredient: Ingredient, inCard: boolean): IngredientCard {
-    return {ingredient, inCard};
-  }
-
-  toIngredientWithSize(ingredient: Ingredient): IngredientWithSize {
-    return {ingredient: ingredient, count: 1, sizeType: IngredientSizeType.X};
+    return this.http.post(environment.apiURL + username, toIngredientWithSize(ingredient));
   }
 }
