@@ -1,11 +1,11 @@
 import {on} from "@ngrx/store";
 import * as ReceiptActions from "./receipt-actions";
-import {Receipt} from "../../model/Receipt";
 import {RecipesResponse} from "../../model/response/RecipesResponse";
 import {createRehydrateReducer} from "ngrx-rehydrate";
+import {BuildReceipt} from "../../model/response/BuildReceipt";
 
 export interface State {
-  recipes: Receipt[];
+  recipes: BuildReceipt[];
 }
 
 export const initialState: State = {

@@ -1,5 +1,5 @@
 <div class="container-lg receipt-container position-relative" *ngIf="receipt$ | async as receipt">
-  <img src="{{receipt.pictureUrl}}"
+  <img src="{{receipt.receipt.pictureUrl}}"
        class="main-image"/>
   <div>
     <a routerLink="/home">
@@ -11,18 +11,20 @@
       <div class="details d-flex justify-content-evenly align-items-center text-center p-1">
         <div class="details-item">
           <img src="assets/images/clock.png">
-          <div>{{getDuration(receipt.timeToPrepare)}} минути</div>
+          <div>{{getDuration(receipt.receipt.timeToPrepare)}} минути</div>
         </div>
         <div class="details-item text-center">
-          <img src="assets/images/difficulty/{{getDifficulty(receipt.difficulty).picture}}" height="42px">
-          <div>тежина: {{getDifficulty(receipt.difficulty).value}}</div>
+          <img src="assets/images/difficulty/{{getDifficulty(receipt.receipt.difficulty).picture}}" height="42px">
+          <div>тежина: {{getDifficulty(receipt.receipt.difficulty).value}}</div>
         </div>
         <div class="details-item">
-          <img src="assets/images/circle/green-check.png" height="60px"/>
+          <img
+            src="{{ receipt.canMake ? 'assets/images/circle/green-check.png' : 'assets/images/circle/red-cross.png' }}"
+            height="60px"/>
         </div>
         <div class="details-item text-center">
           <img src="assets/images/kcal.png">
-          <div>{{receipt.calories}}</div>
+          <div>{{receipt.receipt.calories}}</div>
         </div>
       </div>
       <div class="d-flex justify-content-center" *ngIf="!currentStep; else elseBlock">
@@ -36,7 +38,9 @@
               <h4>{{currentStep!.description}}</h4>
               <div>
                 <button *ngIf="currentStep!.stepNumber - 1 > 0" class="btn btn-danger m-1 receipt-buttons" (click)="previousStep()">предходно</button>
-                <button *ngIf="currentStep!.stepNumber + 1 <= this.receipt.steps.length; else confirmButton" class="btn btn-danger m-1 receipt-buttons" (click)="nextStep()">следно</button>
+                <button *ngIf="currentStep!.stepNumber + 1 <= this.receipt.receipt.steps.length; else confirmButton"
+                        class="btn btn-danger m-1 receipt-buttons" (click)="nextStep()">следно
+                </button>
                 <ng-template #confirmButton>
                   <button class="btn btn-primary receipt-buttons">валидирај</button>
                 </ng-template>
@@ -50,13 +54,15 @@
     </div>
     <div class="right-container px-5 pb-5">
       <h2 class="text-center p-2 text-white">
-        {{receipt.name}} Состојки
+        {{receipt.receipt.name}} Состојки
       </h2>
       <ng-container>
         <ng-container
-          *ngFor="let ingredientWithSize of (currentStep ? currentStep.ingredientsUsed : receipt!.ingredients)">
+          *ngFor="let ingredientWithSize of (currentStep ? currentStep.ingredientsUsed : receipt!.receipt.ingredients)">
           <div class="text-white d-flex justify-content-between align-items-center">
-            <img class="m-1" src="assets/images/circle/green-check.png" height="35px">
+            <img class="m-1"
+                 src="{{containsIngredient(ingredientWithSize.ingredient) ? 'assets/images/circle/green-check.png' : 'assets/images/circle/red-cross.png'}}"
+                 height="35px">
             <span class="w-100">{{ingredientWithSize.ingredient.name}}
               - {{ingredientWithSize.count}} {{ingredientWithSize.sizeType}}</span>
             <img src="{{ingredientWithSize.ingredient.pictureUrl}}" width="50px"/>

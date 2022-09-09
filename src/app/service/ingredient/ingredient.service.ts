@@ -15,7 +15,7 @@ export class IngredientService {
   }
 
   getAllIngredients(filterArr: IngredientWithSize[] = []): Observable<Array<IngredientWithSize>> {
-    return this.http.get<Array<IngredientWithSize>>(environment.apiURL + 'ingredients')
+    return this.http.get<Array<IngredientWithSize>>(environment.apiURL + 'ingredientsSize')
       .pipe(
         map(AllElem => AllElem.filter(elem => !filterArr.find(filterElem => filterElem.id === elem.id))),
       );
@@ -23,6 +23,6 @@ export class IngredientService {
 
   changeIngredientStateValue(card: IngredientCard, username: string) {
     const body: ChangeUserIngredientRequest = {ingredient: card.ingredientWithSize, addIngredient: !card.inCard};
-    return this.http.post(environment.apiURL + username, body);
+    return this.http.post(environment.apiURL + 'changeIngredients/' + username, body);
   }
 }

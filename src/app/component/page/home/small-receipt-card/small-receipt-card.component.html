@@ -1,11 +1,13 @@
 <div class="receipt-card">
-  <div class="bg-black text-white text-center p-1">{{receipt.name}}</div>
+  <div class="bg-black text-white text-center p-1">{{receipt.receipt.name}}</div>
   <div>
-    <img class="w-100 receipt-image" src="{{receipt.pictureUrl}}"/>
+    <img class="w-100 receipt-image" src="{{receipt.receipt.pictureUrl}}"/>
   </div>
   <div class="d-flex flex-row justify-content-around receipt-bar">
-    <div><img src="assets/images/clock.png"/> {{getDuration(receipt.timeToPrepare)}} минути</div>
+    <div><img src="assets/images/clock.png"/> {{getDuration(receipt.receipt.timeToPrepare)}} минути</div>
     <div><img src="assets/images/difficulty/{{getPicture().picture}}" height="35px"/></div>
-    <div><img src="assets/images/circle/green-check.png" height="35px"/></div>
+    <div><img
+      src="{{ receipt.canMake ? 'assets/images/circle/green-check.png' : 'assets/images/circle/red-cross.png' }}"
+      height="35px"/></div>
   </div>
 </div>

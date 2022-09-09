@@ -1,25 +1,27 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {RecipesResponse} from "../../model/response/RecipesResponse";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Receipt} from "../../model/Receipt";
 import {map, Observable} from "rxjs";
+import {BuildReceipt} from "../../model/response/BuildReceipt";
+import {Store} from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReceiptService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private store: Store<{ receipt: any }>) {
+  }
 
   public getRecipes(): Observable<RecipesResponse> {
-    return this.http.get<Array<Receipt>>(environment.apiURL + "recipes")
-      .pipe(map((x: Array<Receipt>) => {
+    return this.http.post<Array<BuildReceipt>>(environment.apiURL + "recipes", {username: "test", password: "test"})
+      .pipe(map((x: Array<BuildReceipt>) => {
         return {recipes: x} as RecipesResponse
       }))
   }
 
-  public getReceipt(id: number): Observable<Receipt> {
-    return this.getRecipes().pipe(map(x => x.recipes[id]));
+  public getReceipt(id: number): Observable<BuildReceipt> {
+    return this.store.pipe(map(x => x.receipt.recipes[id]));
   }
 }

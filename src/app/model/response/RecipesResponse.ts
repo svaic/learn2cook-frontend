@@ -1,5 +1,5 @@
-import {Receipt} from "../Receipt";
+import {BuildReceipt} from "./BuildReceipt";
 
 export interface RecipesResponse {
-  recipes: Array<Receipt>
+  recipes: Array<BuildReceipt>
 }

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ReceiptService} from "../../../service/receipt/receipt.service";
-import {Receipt} from "../../../model/Receipt";
 import {Store} from "@ngrx/store";
 import {getRecipes} from "../../../state-managment/receipt/receipt-actions";
 import {Observable} from "rxjs";
 import {State} from "../../../state-managment/receipt/receipt-reducer";
+import {BuildReceipt} from "../../../model/response/BuildReceipt";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import {State} from "../../../state-managment/receipt/receipt-reducer";
 })
 export class HomeComponent implements OnInit {
 
-  recipes$: Observable<Receipt[]> = this.store.select(x => x.receipt.recipes);
+  recipes$: Observable<BuildReceipt[]> = this.store.select(x => x.receipt.recipes);
 
   constructor(private receiptService: ReceiptService, private store: Store<{ receipt: State }>) {
   }

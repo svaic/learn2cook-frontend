@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Receipt} from "../../../../model/Receipt";
 import {mapDifficulty, parseDuration, ReceiptDifficultyData} from "../../../../utility/utility";
+import {BuildReceipt} from "../../../../model/response/BuildReceipt";
 
 @Component({
   selector: 'app-receipt',
@@ -9,7 +9,7 @@ import {mapDifficulty, parseDuration, ReceiptDifficultyData} from "../../../../u
 })
 export class SmallReceiptCardComponent implements OnChanges {
 
-  @Input() receipt!: Receipt;
+  @Input() receipt!: BuildReceipt;
 
   constructor() {
   }
@@ -22,6 +22,6 @@ export class SmallReceiptCardComponent implements OnChanges {
   }
 
   getPicture(): ReceiptDifficultyData {
-    return mapDifficulty[this.receipt.difficulty];
+    return mapDifficulty[this.receipt.receipt.difficulty];
   }
 }

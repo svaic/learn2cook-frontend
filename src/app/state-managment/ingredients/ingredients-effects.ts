@@ -1,12 +1,14 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {IngredientService} from "../../service/ingredient/ingredient.service";
-import {map, mergeMap} from "rxjs";
+import {map, mergeMap, tap} from "rxjs";
 import {changeIngredientStatus, getIngredients, getIngredientsSuccess} from "./ingredients-actions";
 import {IngredientState} from "./ingredients-reducer";
 import {toIngredientCard} from "../../utility/utility";
 import {IngredientWithSize} from "../../model/IngredientWithSize";
 import {updateUserData} from "../auth/auth-actions";
+import {getRecipes} from "../receipt/receipt-actions";
+import {Store} from "@ngrx/store";
 
 @Injectable()
 export class IngredientsEffects {
@@ -14,6 +16,7 @@ export class IngredientsEffects {
   constructor(
     private actions$: Actions,
     private ingredientsService: IngredientService,
+    private store: Store
   ) {
   }
 
@@ -28,6 +31,7 @@ export class IngredientsEffects {
           } as IngredientState);
         }),
         map(ingredientState => getIngredientsSuccess(ingredientState)),
+        tap(() => this.store.dispatch(getRecipes()))
         )
       )
     ));
