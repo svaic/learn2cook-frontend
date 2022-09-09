@@ -12,10 +12,15 @@ export class HeaderComponent implements OnInit {
 
   userState$ = this.store.select("auth");
 
-  constructor(private store: Store<{auth: any}>,  private _router: Router) { }
+  constructor(private store: Store<{ auth: any }>, private _router: Router) {
+  }
 
   ngOnInit(): void {
     this.redirectToLogin();
+  }
+
+  getRoute(): string {
+    return this._router.url;
   }
 
   logout() {
