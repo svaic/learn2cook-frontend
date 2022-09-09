@@ -20,6 +20,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(getRecipes());
-    this.store.subscribe(x => console.log(x));
   }
 }

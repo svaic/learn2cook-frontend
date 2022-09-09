@@ -41,7 +41,6 @@ export class FloatingIconsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.subscribe(x => console.log(x));
   }
 
   fridgeClicked() {

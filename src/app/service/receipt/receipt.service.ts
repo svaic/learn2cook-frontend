@@ -22,10 +22,9 @@ export class ReceiptService {
     return this.http.post<Array<BuildReceipt>>(environment.apiURL + "recipes", {
       username: this.user?.username,
       password: this.user?.password
-    })
-      .pipe(map((x: Array<BuildReceipt>) => {
-        return {recipes: x} as RecipesResponse
-      }))
+    }).pipe(map((x: Array<BuildReceipt>) => {
+      return {recipes: x} as RecipesResponse
+    }))
   }
 
   public getReceipt(id: number): Observable<BuildReceipt> {

@@ -17,7 +17,7 @@ export class ReceiptEffects {
   getRecipes$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getRecipes),
-        mergeMap(action => this.receiptService.getRecipes().pipe(
+        mergeMap(() => this.receiptService.getRecipes().pipe(
           map((response: RecipesResponse) =>
             getRecipesSuccess(response)
           ), catchError((error: any) => of(getRecipesFailure(error))))
