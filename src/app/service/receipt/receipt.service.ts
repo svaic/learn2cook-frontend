@@ -28,6 +28,6 @@ export class ReceiptService {
   }
 
   public getReceipt(id: number): Observable<BuildReceipt> {
-    return this.store.pipe(map(x => x.receipt.recipes[id]));
+    return this.store.select(x => x.receipt.recipes[id]);
   }
 }

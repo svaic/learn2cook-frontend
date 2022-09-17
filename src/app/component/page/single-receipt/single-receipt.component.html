@@ -27,38 +27,49 @@
           <div>{{receipt.receipt.calories}}</div>
         </div>
       </div>
-      <div class="d-flex justify-content-center" *ngIf="!currentStep; else elseBlock">
-        <button class="btn btn-danger receipt-buttons m-4" (click)="startReceipt()">Започни</button>
-      </div>
-      <ng-template #elseBlock>
-        <div class="d-flex justify-content-between p-2">
-          <div class="p-3">
+      <div *ngIf="(stepState$ | async) as state">
+        <div class="d-flex justify-content-center" *ngIf="state.currentStep == 0; else elseBlock">
+          <button class="btn btn-danger receipt-buttons m-4" (click)="startReceipt()">Започни</button>
+        </div>
+        <ng-template #elseBlock>
+          <div class="d-flex justify-content-between p-2" *ngIf="getCurrentStep(state) as currentStep">
+            <div class="p-3">
               <h2>Чекори</h2>
-              <h4>чекор: {{currentStep!.stepNumber}}</h4>
-              <h4>{{currentStep!.description}}</h4>
+              <h4>чекор: {{state.currentStep}}</h4>
+              <h4>{{currentStep.description}}</h4>
               <div>
-                <button *ngIf="currentStep!.stepNumber - 1 > 0" class="btn btn-danger m-1 receipt-buttons" (click)="previousStep()">предходно</button>
-                <button *ngIf="currentStep!.stepNumber + 1 <= this.receipt.receipt.steps.length; else confirmButton"
+                <button *ngIf="currentStep.stepNumber - 1 > 0" class="btn btn-danger m-1 receipt-buttons" (click)="previousStep()">предходно</button>
+                <button *ngIf="currentStep.stepNumber + 1 <= this.receipt.receipt.steps.length; else confirmButton"
                         class="btn btn-danger m-1 receipt-buttons" (click)="nextStep()">следно
                 </button>
                 <ng-template #confirmButton>
-                  <button class="btn btn-primary receipt-buttons">валидирај</button>
+                  <button class="btn btn-primary receipt-buttons" (click)="showUploadPicture()" *ngIf="!state.isUploadingPictureFinished">валидирај</button>
+                  <button class="btn btn-success receipt-buttons disabled" (click)="showUploadPicture()" *ngIf="state.isUploadingPictureFinished && !state.error">сликата е испратена!</button>
+                  <button class="btn btn-danger receipt-buttons disabled" *ngIf="state.error">{{state.error}}</button>
+                  <div class="text-center d-flex" *ngIf="state.isValidateShown">
+                    <input class="form-control" type="file" (change)="onFileUpload($event)">
+                    <div class="spinner-border mx-2" role="status" *ngIf="state.isUploadingPicture">
+                      <span class="sr-only"></span>
+                    </div>
+                  </div>
                 </ng-template>
               </div>
+            </div>
+            <div>
+              <img src="{{currentStep!.pictureUrl}}" height="200px"/>
+            </div>
           </div>
-          <div>
-            <img src="{{currentStep!.pictureUrl}}" height="200px"/>
-          </div>
-        </div>
-      </ng-template>
+        </ng-template>
+      </div>
+
     </div>
     <div class="right-container px-5 pb-5">
       <h2 class="text-center p-2 text-white">
         {{receipt.receipt.name}} Состојки
       </h2>
-      <ng-container>
+      <ng-container *ngIf="(stepState$ | async) as state">
         <ng-container
-          *ngFor="let ingredientWithSize of (currentStep ? currentStep.ingredientsUsed : receipt!.receipt.ingredients)">
+          *ngFor="let ingredientWithSize of (state.currentStep > 0 ? (getCurrentStep(state)).ingredientsUsed : receipt!.receipt.ingredients)">
           <div class="text-white d-flex justify-content-between align-items-center">
             <img class="m-1"
                  src="{{containsIngredient(ingredientWithSize.ingredient) ? 'assets/images/circle/green-check.png' : 'assets/images/circle/red-cross.png'}}"

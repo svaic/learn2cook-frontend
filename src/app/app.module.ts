@@ -20,6 +20,7 @@ import {RegisterComponent} from './component/page/register/register.component';
 import {ingredientsReducer} from "./state-managment/ingredients/ingredients-reducer";
 import {IngredientsEffects} from "./state-managment/ingredients/ingredients-effects";
 import {SmallReceiptCardComponent} from "./component/page/home/small-receipt-card/small-receipt-card.component";
+import {StepReducer} from "./state-managment/step/step-reducer";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {SmallReceiptCardComponent} from "./component/page/home/small-receipt-car
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({receipt: receiptReducer, auth: authReducer, ingredient: ingredientsReducer}, {}),
+    StoreModule.forRoot({receipt: receiptReducer, auth: authReducer, ingredient: ingredientsReducer, steps: StepReducer}, {}),
     EffectsModule.forRoot([ReceiptEffects, AuthEffects, IngredientsEffects]),
     AppRoutingModule
   ],
