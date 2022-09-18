@@ -1,5 +1,6 @@
 export enum ReceiptType {
-  BREAKFAST="breakfast",
-  LUNCH="lunch",
-  DINNER="dinner"
+  BREAKFAST="BREAKFAST",
+  LUNCH="LUNCH",
+  DINNER="DINNER",
+  ALL="ALL"
 }

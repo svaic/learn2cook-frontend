@@ -4,6 +4,10 @@ import {Ingredient} from "../model/Ingredient";
 import {IngredientCard} from "../state-managment/ingredients/ingredients-reducer";
 import {IngredientWithSize} from "../model/IngredientWithSize";
 import {IngredientSizeType} from "../model/enumerable/IngredientSizeType";
+import {ReceiptType} from "../model/enumerable/ReceiptType";
+import {User} from "../model/user/user";
+import {Time} from "@angular/common";
+import {MealPeriod} from "../model/user/mealPeriod";
 
 export type mapEnum<e extends string | symbol | number, v> = {
   [k in e]: v;
@@ -34,3 +38,32 @@ export const toIngredientWithSize = (ingredient: Ingredient): IngredientWithSize
 
 export const getPointsNotificationText = (points: number) => 'you have now ' + points + ' points'
 
+export const getTimeToEat = (user: User) : ReceiptType => {
+  console.log(user);
+  if (isMealForNow(user.settings.breakfast)) return ReceiptType.BREAKFAST;
+  if (isMealForNow(user.settings.lunch)) return ReceiptType.LUNCH;
+  if (isMealForNow(user.settings.dinner)) return ReceiptType.DINNER;
+  return ReceiptType.ALL;
+}
+
+export const isMealForNow = (meal: MealPeriod) : boolean => {
+  const now = new Date();
+
+  const from = createDate(meal.fromTime);
+  const to = createDate(meal.toTime);
+
+  return inBetweenTwoDates(from, to, now);
+}
+
+export const createDate = (t: Time) => {
+  const newDate = new Date();
+
+  newDate.setHours(t.hours);
+  newDate.setMinutes(t.minutes);
+
+  return newDate;
+}
+
+export const inBetweenTwoDates = (from: Date, to: Date, time: Date) => {
+  return from.getTime() <= time.getTime() && time.getTime() <= to.getTime();
+}

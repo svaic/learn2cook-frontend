@@ -94,13 +94,21 @@ export class SingleReceipt implements OnInit {
           catchError(
             (x: any) => {
               this.store.dispatch(StepAction.uploadPictureError({text: x.error.error}));
-              this.store.dispatch(showNotification({title: 'Error uploading picture', text: x.error.error, color: 'danger'}))
+              this.store.dispatch(showNotification({
+                title: 'Error uploading picture',
+                text: x.error.error,
+                color: 'danger'
+              }))
               return ([]);
             }
           ))
         .subscribe((user: User) => {
           this.store.dispatch(StepAction.uploadPictureFinished(true));
-          this.store.dispatch(showNotification({title: 'successfully uploaded picture', text: getPointsNotificationText(user.points), color: 'success'}))
+          this.store.dispatch(showNotification({
+            title: 'successfully uploaded picture',
+            text: getPointsNotificationText(user.points),
+            color: 'success'
+          }))
           this.store.dispatch(updateUserData(user));
         });
     }

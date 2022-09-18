@@ -21,8 +21,9 @@ export class ReceiptService {
   public getRecipes(): Observable<RecipesResponse> {
     return this.http.post<Array<BuildReceipt>>(environment.apiURL + "recipes", {
       username: this.user?.username,
-      password: this.user?.password
-    }).pipe(map((x: Array<BuildReceipt>) => {
+      password: this.user?.password,
+    }).pipe(
+      map((x: Array<BuildReceipt>) => {
       return {recipes: x} as RecipesResponse
     }))
   }
