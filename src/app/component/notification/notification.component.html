@@ -1,0 +1,10 @@
+<ng-container *ngIf="(showNotification$ | async) as notification">
+  <div class="alert alert-{{notification.color}} position-absolute top-0 start-0 m-3" role="alert" *ngIf="notification.title">
+    <div class="d-flex justify-content-between">
+      <h4 class="alert-heading">{{notification.title}}</h4> <i class="bi bi-x" (click)="close()"></i>
+    </div>
+    <hr>
+    <p>{{notification.text}}</p>
+  </div>
+
+</ng-container>
