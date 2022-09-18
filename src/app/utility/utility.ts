@@ -31,3 +31,6 @@ export const toIngredientCard = (ingredient: IngredientWithSize, inCard: boolean
 export const toIngredientWithSize = (ingredient: Ingredient): IngredientWithSize => {
   return {id: -1, ingredient: ingredient, count: 1, sizeType: IngredientSizeType.X};
 }
+
+export const getPointsNotificationText = (points: number) => 'you have now ' + points + ' points'
+

@@ -21,6 +21,8 @@ import {ingredientsReducer} from "./state-managment/ingredients/ingredients-redu
 import {IngredientsEffects} from "./state-managment/ingredients/ingredients-effects";
 import {SmallReceiptCardComponent} from "./component/page/home/small-receipt-card/small-receipt-card.component";
 import {StepReducer} from "./state-managment/step/step-reducer";
+import {NotificationComponent} from './component/notification/notification.component';
+import {NotificationReducer} from "./state-managment/notification/notification-reducer";
 
 @NgModule({
   declarations: [
@@ -31,17 +33,25 @@ import {StepReducer} from "./state-managment/step/step-reducer";
     HeaderComponent,
     SingleReceipt,
     FloatingIconsComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({receipt: receiptReducer, auth: authReducer, ingredient: ingredientsReducer, steps: StepReducer}, {}),
+    StoreModule.forRoot({
+      receipt: receiptReducer,
+      auth: authReducer,
+      ingredient: ingredientsReducer,
+      steps: StepReducer,
+      notification: NotificationReducer
+    }, {}),
     EffectsModule.forRoot([ReceiptEffects, AuthEffects, IngredientsEffects]),
     AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
