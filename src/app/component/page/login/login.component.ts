@@ -24,5 +24,5 @@ export class LoginComponent {
       password: this.password
     }
     this.store.dispatch(doLogin(loginRequest));
-    }
+  }
 }

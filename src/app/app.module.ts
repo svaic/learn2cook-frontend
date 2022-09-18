@@ -14,7 +14,7 @@ import {ReceiptEffects} from "./state-managment/receipt/receipt-effects";
 import {receiptReducer} from "./state-managment/receipt/receipt-reducer";
 import {FloatingIconsComponent} from './component/floating-icons/floating-icons.component';
 import {FormsModule} from "@angular/forms";
-import {authReducer} from "./state-managment/auth/auth-reducer";
+import {authReducer, logout} from "./state-managment/auth/auth-reducer";
 import {AuthEffects} from "./state-managment/auth/auth-effects";
 import {RegisterComponent} from './component/page/register/register.component';
 import {ingredientsReducer} from "./state-managment/ingredients/ingredients-reducer";
@@ -46,7 +46,7 @@ import {NotificationReducer} from "./state-managment/notification/notification-r
       ingredient: ingredientsReducer,
       steps: StepReducer,
       notification: NotificationReducer
-    }, {}),
+    }, {metaReducers: [logout]}),
     EffectsModule.forRoot([ReceiptEffects, AuthEffects, IngredientsEffects]),
     AppRoutingModule
   ],

@@ -8,6 +8,7 @@ import {
 } from "../../state-managment/ingredients/ingredients-actions";
 import {IngredientType} from "../../model/enumerable/IngredientType";
 import {IngredientCard, IngredientState} from "../../state-managment/ingredients/ingredients-reducer";
+import {User} from "../../model/user/user";
 
 @Component({
   selector: 'app-floating-icons',
@@ -18,7 +19,7 @@ export class FloatingIconsComponent implements OnInit {
 
   public showFridgePanel: boolean = false;
   public showKitchenPanel: boolean = false;
-  public user: any;
+  public user?: User;
   fridgeIngredients$: Observable<IngredientState> = of({} as IngredientState);
   kitchenIngredients$: Observable<IngredientState> = of({} as IngredientState)
 
@@ -30,9 +31,8 @@ export class FloatingIconsComponent implements OnInit {
             getIngredients(
               {have: (user.kitchenItems.concat(user.fridgeItems))})
           );
-
-          this.user = user;
         }
+        this.user = user;
       }
     );
 
@@ -53,6 +53,6 @@ export class FloatingIconsComponent implements OnInit {
 
   checkBoxChanged(card: IngredientCard) {
     const user = this.user
-    this.store.dispatch(changeIngredientStatus({card, currUser: user}));
+    this.store.dispatch(changeIngredientStatus({card, currUser: user!}));
   }
 }

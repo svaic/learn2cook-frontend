@@ -12,7 +12,7 @@ import {User} from "../../model/user/user";
 })
 export class ReceiptService {
 
-  user: User | undefined;
+  user?: User;
 
   constructor(private http: HttpClient, private store: Store<{ receipt: any, auth: any }>) {
     this.store.select(x => x.auth.currUser).subscribe(x => this.user = x);
