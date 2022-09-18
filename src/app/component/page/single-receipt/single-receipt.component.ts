@@ -8,15 +8,7 @@ import {ReceiptDifficulty} from "../../../model/enumerable/ReceiptDifficulty";
 import {BuildReceipt} from "../../../model/response/BuildReceipt";
 import {User} from "../../../model/user/user";
 import {Ingredient} from "../../../model/Ingredient";
-import {
-  changeValidateState,
-  isUploadingImage,
-  nextStep,
-  previousStep,
-  setSteps,
-  uploadPictureError,
-  uploadPictureFinished
-} from "../../../state-managment/step/step-actions";
+import * as StepAction from "../../../state-managment/step/step-actions";
 import {StepState} from "../../../state-managment/step/step-reducer";
 import {ImageSendService} from "../../../service/images/image-send.service";
 import {updateUserData} from "../../../state-managment/auth/auth-actions";
@@ -45,7 +37,7 @@ export class SingleReceipt implements OnInit {
 
     this.receipt$.subscribe(receipt => {
       if (!this.fetchedSteps) {
-        this.store.dispatch(setSteps(receipt.receipt.steps));
+        this.store.dispatch(StepAction.setSteps(receipt.receipt.steps));
         this.fetchedSteps = true;
       }
     });
@@ -54,7 +46,7 @@ export class SingleReceipt implements OnInit {
   }
 
   startReceipt() {
-    this.store.dispatch(nextStep());
+    this.store.dispatch(StepAction.nextStep());
   }
 
   getCurrentStep(state: StepState) {
@@ -62,11 +54,11 @@ export class SingleReceipt implements OnInit {
   }
 
   nextStep() {
-    this.store.dispatch(nextStep());
+    this.store.dispatch(StepAction.nextStep());
   }
 
   previousStep() {
-    this.store.dispatch(previousStep());
+    this.store.dispatch(StepAction.previousStep());
   }
 
   getDifficulty(difficulty: ReceiptDifficulty): ReceiptDifficultyData {
@@ -81,19 +73,18 @@ export class SingleReceipt implements OnInit {
     if (this.user) {
       if (ingredient.type == IngredientType.FRIDGE && this.user.fridgeItems.find(x => x.ingredient.id === ingredient.id)) return true;
       if (ingredient.type == IngredientType.KITCHEN && this.user.kitchenItems.find(x => x.ingredient.id === ingredient.id)) return true;
-      return false;
     }
     return false;
   }
 
   showUploadPicture() {
-    this.store.dispatch(changeValidateState(true));
+    this.store.dispatch(StepAction.changeValidateState(true));
   }
 
   onFileUpload(event: any) {
     const file: File = event.target.files[0];
 
-    this.store.dispatch(isUploadingImage(true));
+    this.store.dispatch(StepAction.isUploadingImage(true));
 
     const id = this.route.snapshot.paramMap.get("id");
 
@@ -102,13 +93,13 @@ export class SingleReceipt implements OnInit {
         .pipe(
           catchError(
             (x: any) => {
-              this.store.dispatch(uploadPictureError({text: x.error.error}));
+              this.store.dispatch(StepAction.uploadPictureError({text: x.error.error}));
               this.store.dispatch(showNotification({title: 'Error uploading picture', text: x.error.error, color: 'danger'}))
               return ([]);
             }
           ))
         .subscribe((user: User) => {
-          this.store.dispatch(uploadPictureFinished(true));
+          this.store.dispatch(StepAction.uploadPictureFinished(true));
           this.store.dispatch(showNotification({title: 'successfully uploaded picture', text: getPointsNotificationText(user.points), color: 'success'}))
           this.store.dispatch(updateUserData(user));
         });
