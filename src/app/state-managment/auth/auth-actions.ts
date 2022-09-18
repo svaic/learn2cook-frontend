@@ -4,6 +4,8 @@ export const DO_LOGIN = "[Auth] login";
 
 export const DO_LOGIN_SUCCESS = "[Auth] login success";
 
+export const DO_LOGIN_FAILURE = "[Auth] login failure";
+
 export const DO_LOGOUT = "[Auth] logout";
 
 export const DO_REGISTER = "[Auth] register";
@@ -17,6 +19,11 @@ export const doLogin = createAction(
 
 export const doLoginSuccess = createAction(
   DO_LOGIN_SUCCESS,
+  props<any>()
+)
+
+export const doLoginFailure = createAction(
+  DO_LOGIN_FAILURE,
   props<any>()
 )
 
