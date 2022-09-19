@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://learn2cook-backend.herokuapp.com/'
+  apiURL: 'http://localhost:8080/'
 };
 
 /*
