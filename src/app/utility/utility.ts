@@ -39,7 +39,6 @@ export const toIngredientWithSize = (ingredient: Ingredient): IngredientWithSize
 export const getPointsNotificationText = (points: number) => 'you have now ' + points + ' points'
 
 export const getTimeToEat = (user: User) : ReceiptType => {
-  console.log(user);
   if (isMealForNow(user.settings.breakfast)) return ReceiptType.BREAKFAST;
   if (isMealForNow(user.settings.lunch)) return ReceiptType.LUNCH;
   if (isMealForNow(user.settings.dinner)) return ReceiptType.DINNER;
