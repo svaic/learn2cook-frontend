@@ -28,7 +28,10 @@ export const StepReducer = createReducer(
   on(StepActions.changeValidateState, (state, value) => ({...state, isValidateShown: value})),
   on(StepActions.isUploadingImage, (state, value) => ({...state, isUploadingPicture: value})),
   on(StepActions.uploadPictureFinished, (state, value) => ({...state, isUploadingPictureFinished: value, isValidateShown: false, isUploadingPicture: false, error: undefined})),
-  on(StepActions.uploadPictureError, (state, error: { text: string }) => {
-    return ({...state, error: error.text, isUploadingPicture:false, isUploadingPictureFinished: true})
-  })
+  on(StepActions.uploadPictureError, (state, error: { text: string }) => ({
+    ...state,
+    error: error.text,
+    isUploadingPicture: false,
+    isUploadingPictureFinished: true
+  }))
 )

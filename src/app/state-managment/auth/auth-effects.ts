@@ -46,7 +46,7 @@ export class AuthEffects {
       ofType(AuthAction.DO_LOGIN_FAILURE),
       map((error: HttpErrorResponse) => showNotification({
         title: 'could not login',
-        text: error.error.error,
+        text: error.error.message,
         color: 'danger'
       }))
     ))

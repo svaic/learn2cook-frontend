@@ -94,9 +94,10 @@ export class SingleReceipt implements OnInit {
           catchError(
             (x: any) => {
               this.store.dispatch(StepAction.uploadPictureError({text: x.error.error}));
+              console.log(x);
               this.store.dispatch(showNotification({
                 title: 'Error uploading picture',
-                text: x.error.error,
+                text: x.error.message,
                 color: 'danger'
               }))
               return ([]);

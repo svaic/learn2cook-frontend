@@ -20,7 +20,7 @@ export class NotificationComponent {
 
     this.showNotification$.subscribe(x => {
       clearTimeout(this.timer);
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.store.dispatch(clearNotification());
       }, 10000);
     });
