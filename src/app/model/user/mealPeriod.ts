@@ -1,8 +1,6 @@
-import {Time} from "@angular/common";
-
 export interface MealPeriod {
-  fromTime: Time;
-  toTime: Time;
+  fromTime: string;
+  toTime: string;
   salad: boolean;
   desert: boolean;
 }

@@ -4,7 +4,6 @@ import {IngredientCard} from "../state-managment/ingredients/ingredients-reducer
 import {IngredientWithSize} from "../model/IngredientWithSize";
 import {ReceiptType} from "../model/enumerable/ReceiptType";
 import {User} from "../model/user/user";
-import {Time} from "@angular/common";
 import {MealPeriod} from "../model/user/mealPeriod";
 import {BuildReceipt} from "../model/response/BuildReceipt";
 
@@ -43,17 +42,18 @@ export const getTimeToEat = (user: User): ReceiptType => {
 export const isMealForNow = (meal: MealPeriod): boolean => {
   const now = new Date();
 
-  const from = createDate(meal.fromTime);
+  const from = createDate(meal.fromTime as string);
   const to = createDate(meal.toTime);
 
   return inBetweenTwoDates(from, to, now);
 }
 
-export const createDate = (t: Time) => {
+export const createDate = (t: string) => {
   const newDate = new Date();
+  const [hours, minutes] = t.split(':');
 
-  newDate.setHours(t.hours);
-  newDate.setMinutes(t.minutes);
+  newDate.setHours(+hours);
+  newDate.setMinutes(+minutes);
 
   return newDate;
 }

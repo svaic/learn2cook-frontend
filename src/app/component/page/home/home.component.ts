@@ -26,12 +26,13 @@ export class HomeComponent implements OnInit {
     this.recipes$ = this.store.select(x => x.receipt).pipe(
       map(x => x.filter ? x.recipes.filter(y => y.receipt.type === x.filter) : x.recipes));
 
-    this.store.select(x=>x.auth.currUser).subscribe(x=>{this.user = x});
+    this.store.select(x=>x.auth.currUser).subscribe(x=>this.user = x);
   }
 
   ngOnInit(): void {
     this.store.dispatch(getRecipes());
     this.receiptTypeFilter = getTimeToEat(this.user!);
+    this.filterChanged();
   }
 
   filterChanged() {
