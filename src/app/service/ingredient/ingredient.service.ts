@@ -17,12 +17,12 @@ export class IngredientService {
   getAllIngredients(filterArr: IngredientWithSize[] = []): Observable<Array<IngredientWithSize>> {
     return this.http.get<Array<IngredientWithSize>>(environment.apiURL + 'ingredientsSize')
       .pipe(
-        map(AllElem => AllElem.filter(elem => !filterArr.find(filterElem => filterElem.id === elem.id))),
+        map(AllElem => AllElem.filter(elem => !filterArr.find(filterElem => filterElem.id === elem.id)))
       );
   }
 
-  changeIngredientStateValue(card: IngredientCard, username: string) {
+  changeIngredientStateValue(card: IngredientCard) {
     const body: ChangeUserIngredientRequest = {ingredient: card.ingredientWithSize, addIngredient: !card.inCard};
-    return this.http.post(environment.apiURL + 'changeIngredients/' + username, body);
+    return this.http.post(environment.apiURL + 'changeIngredients', body);
   }
 }

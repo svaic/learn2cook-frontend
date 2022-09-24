@@ -9,6 +9,7 @@ import {
 import {IngredientType} from "../../model/enumerable/IngredientType";
 import {IngredientCard, IngredientState} from "../../state-managment/ingredients/ingredients-reducer";
 import {User} from "../../model/user/user";
+import {updateRecipes} from "../../state-managment/receipt/receipt-actions";
 
 @Component({
   selector: 'app-floating-icons',
@@ -36,6 +37,11 @@ export class FloatingIconsComponent implements OnInit {
       }
     );
 
+    this.store.select(x=>x.ingredient).subscribe(x => {
+      if (x.cards && x.cards.length > 0)
+        this.store.dispatch(updateRecipes({ingredients: x.cards}))
+    });
+
     this.fridgeIngredients$ = getPipeForItems(this.store, IngredientType.FRIDGE);
     this.kitchenIngredients$ = getPipeForItems(this.store, IngredientType.KITCHEN);
   }
@@ -52,7 +58,6 @@ export class FloatingIconsComponent implements OnInit {
   }
 
   checkBoxChanged(card: IngredientCard) {
-    const user = this.user
-    this.store.dispatch(changeIngredientStatus({card, currUser: user!}));
+    this.store.dispatch(changeIngredientStatus({card, currUser: this.user!}));
   }
 }

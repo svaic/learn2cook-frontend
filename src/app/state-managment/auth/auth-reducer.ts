@@ -5,20 +5,24 @@ import {createRehydrateReducer} from "ngrx-rehydrate";
 import {User} from "../../model/user/user";
 
 export interface AuthState {
-  currUser: User
+  currUser: User,
+  jwtToken: string
 }
 
 export const initialState = {
-  currUser: undefined
+  currUser: undefined,
+  jwtToken: undefined
 }
+
 
 export const authReducer = createRehydrateReducer(
   {key: 'UserKey'},
   initialState,
-  on(AuthActions.doLoginSuccess, (state, user) => ({currUser: user})),
-  on(AuthActions.updateUserData, (state, user) => ({currUser: user})),
+  on(AuthActions.doLoginSuccess, (state, props) => ({...state, currUser: props.user})),
+  on(AuthActions.updateUserData, (state, user) => ({...state, currUser: user})),
   on(AuthActions.doLogout, () => (initialState)),
-  on(AuthActions.doRegisterSuccess, (state, user) => ({currUser: user})),
+  on(AuthActions.doRegisterSuccess, (state, props) => ({...state, currUser: props.user})),
+  on(AuthActions.updateJwtToken, (state, props) => ({...state, jwtToken: props.jwtToken}))
 )
 
 export const logout = (reducer: any) =>

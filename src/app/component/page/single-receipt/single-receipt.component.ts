@@ -14,6 +14,7 @@ import {ImageSendService} from "../../../service/images/image-send.service";
 import {updateUserData} from "../../../state-managment/auth/auth-actions";
 import {IngredientType} from "../../../model/enumerable/IngredientType";
 import {showNotification} from "../../../state-managment/notification/notification-actions";
+import {IngredientCard, IngredientState} from "../../../state-managment/ingredients/ingredients-reducer";
 
 @Component({
   selector: 'app-cook-receipt',
@@ -25,9 +26,10 @@ export class SingleReceipt implements OnInit {
   receipt$: Observable<BuildReceipt>;
   stepState$: Observable<StepState>;
   user: User | undefined;
+  fridge: IngredientCard[] = [];
   fetchedSteps: boolean = false;
 
-  constructor(private receiptService: ReceiptService, private route: ActivatedRoute, private readonly store: Store, private imageSendService: ImageSendService) {
+  constructor(private receiptService: ReceiptService, private route: ActivatedRoute, private readonly store: Store<{ingredient: IngredientState}>, private imageSendService: ImageSendService) {
 
     this.store.select((state: any) => state.auth.currUser).subscribe(x => this.user = x);
 
@@ -43,6 +45,8 @@ export class SingleReceipt implements OnInit {
     });
 
     this.stepState$ = this.store.select((x: any) => x.steps)
+
+    this.store.select(x=>x.ingredient).subscribe(x=> this.fridge = x.cards)
   }
 
   startReceipt() {
@@ -70,9 +74,12 @@ export class SingleReceipt implements OnInit {
   }
 
   containsIngredient(ingredient: Ingredient) {
-    if (this.user) {
-      if (ingredient.type == IngredientType.FRIDGE && this.user.fridgeItems.find(x => x.ingredient.id === ingredient.id)) return true;
-      if (ingredient.type == IngredientType.KITCHEN && this.user.kitchenItems.find(x => x.ingredient.id === ingredient.id)) return true;
+    if (this.fridge) {
+      if (ingredient.type == IngredientType.FRIDGE) {
+        const userIngredient = this.fridge.find(x => x.ingredientWithSize.ingredient.id === ingredient.id);
+        if (userIngredient && userIngredient.inCard) return true;
+      }
+      if (ingredient.type == IngredientType.KITCHEN && this.user!.kitchenItems.find(x => x.ingredient.id === ingredient.id)) return true;
     }
     return false;
   }

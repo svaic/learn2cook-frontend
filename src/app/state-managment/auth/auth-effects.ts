@@ -3,22 +3,23 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {UserService} from "../../service/user/user.service";
 import * as AuthAction from "./auth-actions";
 import {catchError, map, mergeMap, of, tap} from "rxjs";
-import {User} from "../../model/user/user";
 import {Router} from "@angular/router";
 import {showNotification} from "../notification/notification-actions";
 import {HttpErrorResponse} from "@angular/common/http";
+import {User} from "../../model/user/user";
 
 @Injectable()
 export class AuthEffects {
 
-  getRecipes$ = createEffect(() =>
+  doLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthAction.DO_LOGIN),
-      mergeMap((action: { username: string, password: string }) => this.userService.login(action)
-        .pipe(
-          map((response: User) => AuthAction.doLoginSuccess(response)),
-          tap(x => this._router.navigateByUrl("/home")),
-          catchError((error: HttpErrorResponse) => of(AuthAction.doLoginFailure(error))))
+      mergeMap((action: { username: string, password: string }) =>
+        this.userService.login(action)
+          .pipe(
+            map((user: User) => AuthAction.doLoginSuccess({user})),
+            tap(x => this._router.navigateByUrl("/home")),
+            catchError((error: HttpErrorResponse) => of(AuthAction.doLoginFailure(error))))
       )));
 
   doRegister$ = createEffect(() =>
@@ -27,7 +28,7 @@ export class AuthEffects {
       mergeMap((action: { username: string, password: string }) =>
         this.userService.register(action)
           .pipe(
-            map((response: User) => AuthAction.doRegisterSuccess(response)),
+            map((user: User) => AuthAction.doRegisterSuccess({user})),
             tap(x => this._router.navigateByUrl("/home")),
             catchError((error: any) => of(AuthAction.doLoginFailure(error))))
       )));
@@ -38,8 +39,7 @@ export class AuthEffects {
       tap(() => {
         this._router.navigateByUrl("/login");
       })
-    ), {dispatch: false}
-  )
+    ), {dispatch: false})
 
   failedLogin$ = createEffect(() =>
     this.actions$.pipe(
@@ -55,6 +55,5 @@ export class AuthEffects {
     private actions$: Actions,
     private userService: UserService,
     private _router: Router
-  ) {
-  }
+  ) {}
 }

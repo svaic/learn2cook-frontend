@@ -32,6 +32,11 @@ export const updateUserData = createAction(
   props<any>()
 )
 
+export const updateJwtToken = createAction(
+  "UPDATE_JWT_TOKEN",
+  props<any>()
+)
+
 export const doLogout = createAction(
   DO_LOGOUT,
   (payload: any = {}) => payload

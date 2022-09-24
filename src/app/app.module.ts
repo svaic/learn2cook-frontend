@@ -23,6 +23,7 @@ import {SmallReceiptCardComponent} from "./component/page/home/small-receipt-car
 import {StepReducer} from "./state-managment/step/step-reducer";
 import {NotificationComponent} from './component/notification/notification.component';
 import {NotificationReducer} from "./state-managment/notification/notification-reducer";
+import {authInterceptorProviders} from "./interceptor/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import {NotificationReducer} from "./state-managment/notification/notification-r
     EffectsModule.forRoot([ReceiptEffects, AuthEffects, IngredientsEffects]),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

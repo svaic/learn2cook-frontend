@@ -6,7 +6,6 @@ import {changeIngredientStatus, getIngredients, getIngredientsSuccess} from "./i
 import {IngredientState} from "./ingredients-reducer";
 import {toIngredientCard} from "../../utility/utility";
 import {IngredientWithSize} from "../../model/IngredientWithSize";
-import {updateUserData} from "../auth/auth-actions";
 import {getRecipes} from "../receipt/receipt-actions";
 import {Store} from "@ngrx/store";
 
@@ -40,9 +39,9 @@ export class IngredientsEffects {
     this.actions$.pipe(ofType(changeIngredientStatus),
       mergeMap((payload) =>
         this.ingredientsService
-          .changeIngredientStateValue(payload.card, payload.currUser.username)
-          .pipe(map((x) => updateUserData(x)))
+          .changeIngredientStateValue(payload.card)
+          //.pipe(map((x) => updateUserData(x)))
       ),
-    )
+    ),{ dispatch: false }
   )
 }

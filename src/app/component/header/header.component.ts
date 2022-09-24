@@ -16,7 +16,11 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.redirectToLogin();
+    this.userState$.subscribe(userState => {
+      if (!userState.currUser) {
+        this._router.navigateByUrl("/login");
+      }
+    })
   }
 
   getRoute(): string {
@@ -25,14 +29,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.store.dispatch(doLogout());
-  }
-
-  redirectToLogin() {
-    this.userState$.subscribe(userState => {
-      if (!userState.currUser) {
-        this._router.navigateByUrl("/login");
-      }
-    })
   }
 
 }
