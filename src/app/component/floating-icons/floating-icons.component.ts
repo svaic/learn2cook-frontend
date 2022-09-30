@@ -30,7 +30,7 @@ export class FloatingIconsComponent implements OnInit {
         if (user) {
           this.store.dispatch(
             getIngredients(
-              {have: (user.kitchenItems.concat(user.fridgeItems))})
+              {have: user.items})
           );
         }
         this.user = user;
@@ -38,8 +38,11 @@ export class FloatingIconsComponent implements OnInit {
     );
 
     this.store.select(x=>x.ingredient).subscribe(x => {
-      if (x.cards && x.cards.length > 0)
+      if (this.user) {
+        if (x.cards && x.cards.length > 0)
         this.store.dispatch(updateRecipes({ingredients: x.cards}))
+      }
+
     });
 
     this.fridgeIngredients$ = getPipeForItems(this.store, IngredientType.FRIDGE);
@@ -58,6 +61,6 @@ export class FloatingIconsComponent implements OnInit {
   }
 
   checkBoxChanged(card: IngredientCard) {
-    this.store.dispatch(changeIngredientStatus({card, currUser: this.user!}));
+    this.store.dispatch(changeIngredientStatus({card}));
   }
 }

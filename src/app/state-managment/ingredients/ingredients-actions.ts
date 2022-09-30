@@ -1,5 +1,4 @@
 import {createAction, props, Store} from "@ngrx/store";
-import {User} from "../../model/user/user";
 import {IngredientType} from "../../model/enumerable/IngredientType";
 import {map} from "rxjs";
 import {IngredientCard, IngredientState} from "./ingredients-reducer";
@@ -18,14 +17,14 @@ export const getPipeForItems = (store: Store<{ ingredient: any }>, type: Ingredi
   store.select("ingredient")
     .pipe(
       map((state: IngredientState) =>
-        ({cards: state.cards.filter((x: IngredientCard) => x.ingredientWithSize.ingredient.type == type)})),
+        ({cards: state.cards.filter((x: IngredientCard) => x.ingredient.type == type)})),
       map(x => ({...x, ...x.cards.sort(compare)})));
 
 function compare(a: IngredientCard, b: IngredientCard) {
-  if (a.ingredientWithSize.id < b.ingredientWithSize.id) {
+  if (a.ingredient.id < b.ingredient.id) {
     return -1;
   }
-  if (a.ingredientWithSize.id > b.ingredientWithSize.id) {
+  if (a.ingredient.id > b.ingredient.id) {
     return 1;
   }
   return 0;
@@ -48,7 +47,7 @@ export const addIngredient = createAction(
 
 export const changeIngredientStatus = createAction(
   CHANGE_INGREDIENT,
-  props<{ card: IngredientCard, currUser: User }>()
+  props<{ card: IngredientCard}>()
 )
 
 export const RemoveIngredient = createAction(

@@ -24,6 +24,7 @@ import {StepReducer} from "./state-managment/step/step-reducer";
 import {NotificationComponent} from './component/notification/notification.component';
 import {NotificationReducer} from "./state-managment/notification/notification-reducer";
 import {authInterceptorProviders} from "./interceptor/auth.interceptor";
+import {SettingsComponent} from './component/page/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {authInterceptorProviders} from "./interceptor/auth.interceptor";
     SingleReceipt,
     FloatingIconsComponent,
     RegisterComponent,
-    NotificationComponent
+    NotificationComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

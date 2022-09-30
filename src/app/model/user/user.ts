@@ -1,11 +1,10 @@
-import {IngredientWithSize} from "../IngredientWithSize";
 import {Settings} from "./settings";
+import {Ingredient} from "../Ingredient";
 
 export interface User {
   username: string;
   type: string;
-  fridgeItems: Array<IngredientWithSize>;
-  kitchenItems: Array<IngredientWithSize>;
+  items: Array<Ingredient>;
   points: number;
   settings: Settings;
   hasArchivedCertificate: boolean

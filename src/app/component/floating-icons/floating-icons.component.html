@@ -7,7 +7,7 @@
         <ul class="p-2 scroll-container overflow-auto">
           <ng-container *ngFor="let item of ingredients.cards">
             <li><input (change)="checkBoxChanged(item)" [checked]="item.inCard"
-                       type="checkbox">{{item.ingredientWithSize.ingredient.name}}
+                       type="checkbox">{{item.ingredient.name}}
             </li>
           </ng-container>
         </ul>
@@ -24,7 +24,7 @@
         <ul class="p-2 scroll-container overflow-auto">
           <ng-container *ngFor="let item of ingredients.cards">
             <li><input (change)="checkBoxChanged(item)" [checked]="item.inCard"
-                       type="checkbox">{{item.ingredientWithSize.ingredient.name}}
+                       type="checkbox">{{item.ingredient.name}}
             </li>
           </ng-container>
         </ul>

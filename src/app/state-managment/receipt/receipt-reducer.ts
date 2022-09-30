@@ -21,6 +21,6 @@ export const receiptReducer = createRehydrateReducer(
   on(ReceiptActions.getRecipesSuccess, (state, response: RecipesResponse) => ({...state, recipes: response.recipes})),
   on(ReceiptActions.setReceiptType, (state, props) => ({...state, filter: props.filter})),
   on(ReceiptActions.updateRecipes, (state, props) => {
-    return ({...state, recipes: state.recipes.map(receipt => toBuildReceipt(receipt, props.ingredients))})
+    return ({...state, recipes: state.recipes.map(receipt => toBuildReceipt(receipt.receipt, props.ingredients))})
   })
 )

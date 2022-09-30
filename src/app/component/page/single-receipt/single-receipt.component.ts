@@ -12,7 +12,6 @@ import * as StepAction from "../../../state-managment/step/step-actions";
 import {StepState} from "../../../state-managment/step/step-reducer";
 import {ImageSendService} from "../../../service/images/image-send.service";
 import {updateUserData} from "../../../state-managment/auth/auth-actions";
-import {IngredientType} from "../../../model/enumerable/IngredientType";
 import {showNotification} from "../../../state-managment/notification/notification-actions";
 import {IngredientCard, IngredientState} from "../../../state-managment/ingredients/ingredients-reducer";
 
@@ -26,10 +25,10 @@ export class SingleReceipt implements OnInit {
   receipt$: Observable<BuildReceipt>;
   stepState$: Observable<StepState>;
   user: User | undefined;
-  fridge: IngredientCard[] = [];
+  items: IngredientCard[] = [];
   fetchedSteps: boolean = false;
 
-  constructor(private receiptService: ReceiptService, private route: ActivatedRoute, private readonly store: Store<{ingredient: IngredientState}>, private imageSendService: ImageSendService) {
+  constructor(private receiptService: ReceiptService, private route: ActivatedRoute, private readonly store: Store<{ ingredient: IngredientState }>, private imageSendService: ImageSendService) {
 
     this.store.select((state: any) => state.auth.currUser).subscribe(x => this.user = x);
 
@@ -46,7 +45,7 @@ export class SingleReceipt implements OnInit {
 
     this.stepState$ = this.store.select((x: any) => x.steps)
 
-    this.store.select(x=>x.ingredient).subscribe(x=> this.fridge = x.cards)
+    this.store.select(x => x.ingredient).subscribe(x => this.items = x.cards)
   }
 
   startReceipt() {
@@ -74,12 +73,9 @@ export class SingleReceipt implements OnInit {
   }
 
   containsIngredient(ingredient: Ingredient) {
-    if (this.fridge) {
-      if (ingredient.type == IngredientType.FRIDGE) {
-        const userIngredient = this.fridge.find(x => x.ingredientWithSize.ingredient.id === ingredient.id);
-        if (userIngredient && userIngredient.inCard) return true;
-      }
-      if (ingredient.type == IngredientType.KITCHEN && this.user!.kitchenItems.find(x => x.ingredient.id === ingredient.id)) return true;
+    if (this.items) {
+      const userIngredient = this.items.find(x => x.ingredient.id === ingredient.id);
+      if (userIngredient && userIngredient.inCard) return true;
     }
     return false;
   }
@@ -112,7 +108,7 @@ export class SingleReceipt implements OnInit {
         .subscribe((user: User) => {
           this.store.dispatch(StepAction.uploadPictureFinished(true));
           this.store.dispatch(showNotification({
-            title: 'successfully uploaded picture',
+            title: 'успешно испратена слика',
             text: getPointsNotificationText(user.points),
             color: 'success'
           }))

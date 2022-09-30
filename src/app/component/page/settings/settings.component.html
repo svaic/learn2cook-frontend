@@ -1,0 +1,43 @@
+<div class="container-lg home-container d-flex flex-column align-items-center">
+  <div class="home-bar text-center w-100 p-2">
+    Поставување
+  </div>
+  <div class="recipes-container">
+    <div class="d-flex justify-evenly">
+      <div class="w-100 p-3">
+        <div>
+          <label>состојки кои не ги сакам</label>
+          <input class="form-control" type="text"  name="username">
+          <button class="btn btn-danger">додај</button>
+        </div>
+        <div>
+          <label class="w-100">колку пати на ден сакаш да готвиш</label>
+          <input class="form-control" type="number"  name="username">
+        </div>
+      </div>
+      <div class="w-100 p-3">
+        <div>
+          <label class="w-100">Во кое време сакаш да готвиш доручек</label>
+          <input class="form-control w-50 d-inline-block" [(ngModel)]="breakfast.fromTime" type="time"  name="username">
+          <input class="form-control w-50 d-inline-block" [(ngModel)]="breakfast.toTime" type="time"  name="username">
+        </div>
+
+        <div>
+          <label class="w-100">Во кое време сакаш да готвиш ручек</label>
+          <input class="form-control w-50 d-inline-block" type="time" [(ngModel)]="lunch.fromTime"  name="username">
+          <input class="form-control w-50 d-inline-block" type="time" [(ngModel)]="lunch.toTime" name="username">
+        </div>
+
+        <div>
+          <label class="w-100">Во кое време сакаш да готвиш вечера</label>
+          <input class="form-control w-50 d-inline-block" type="time" [(ngModel)]="dinner.fromTime" name="username">
+          <input class="form-control w-50 d-inline-block" type="time" [(ngModel)]="dinner.toTime" name="username">
+        </div>
+        <label>Вегетаријанец</label>
+        <input [checked]="isVegan" (change)="isVegan = !isVegan" type="checkbox">
+      </div>
+    </div>
+      <button class="btn btn-danger w-50"  (click)="save()">Зачувај</button>
+    <button class="btn btn-danger w-50"  (click)="goToHome()">Откажи</button>
+  </div>
+</div>

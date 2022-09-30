@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import {AuthState} from "../../state-managment/auth/auth-reducer";
 import {Store} from "@ngrx/store";
 import {doLogout} from "../../state-managment/auth/auth-actions";
+import {Settings} from "../../model/user/settings";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class UserService {
 
   register(request: LoginRequest) {
     return this.http.post<User>(environment.apiURL + "register", request)
+  }
+
+  updateSettings(settings: Settings) {
+    return this.http.post(environment.apiURL + "settings", settings);
   }
 
   refreshToken(): Observable<any> {

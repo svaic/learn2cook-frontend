@@ -45,7 +45,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthAction.DO_LOGIN_FAILURE),
       map((error: HttpErrorResponse) => showNotification({
-        title: 'could not login',
+        title: 'неуспешна најава',
         text: error.error.message,
         color: 'danger'
       }))

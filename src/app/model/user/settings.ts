@@ -7,5 +7,5 @@ export interface Settings {
   lunch: MealPeriod;
   dinner: MealPeriod;
   maxCalories: number;
-  isVegan: boolean;
+  vegan: boolean;
 }

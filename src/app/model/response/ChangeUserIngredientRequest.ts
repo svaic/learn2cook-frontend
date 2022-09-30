@@ -1,6 +1,6 @@
-import {IngredientWithSize} from "../IngredientWithSize";
+import {Ingredient} from "../Ingredient";
 
 export interface ChangeUserIngredientRequest {
-  ingredient: IngredientWithSize,
+  ingredient: Ingredient,
   addIngredient: boolean
 }

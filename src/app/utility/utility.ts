@@ -1,11 +1,12 @@
 import {ReceiptDifficulty} from "../model/enumerable/ReceiptDifficulty";
 import * as moment from "moment";
 import {IngredientCard} from "../state-managment/ingredients/ingredients-reducer";
-import {IngredientWithSize} from "../model/IngredientWithSize";
 import {ReceiptType} from "../model/enumerable/ReceiptType";
 import {User} from "../model/user/user";
 import {MealPeriod} from "../model/user/mealPeriod";
 import {BuildReceipt} from "../model/response/BuildReceipt";
+import {Ingredient} from "../model/Ingredient";
+import {Receipt} from "../model/Receipt";
 
 export type mapEnum<e extends string | symbol | number, v> = {
   [k in e]: v;
@@ -26,11 +27,11 @@ export const parseDuration = (duration: string) => {
   return moment.duration(duration).asMinutes();
 }
 
-export const toIngredientCard = (ingredient: IngredientWithSize, inCard: boolean): IngredientCard => {
-  return {ingredientWithSize: ingredient, inCard};
+export const toIngredientCard = (ingredient: Ingredient, inCard: boolean): IngredientCard => {
+  return {ingredient: ingredient, inCard};
 }
 
-export const getPointsNotificationText = (points: number) => 'you have now ' + points + ' points'
+export const getPointsNotificationText = (points: number) => 'сега имате ' + points + ' поени'
 
 export const getTimeToEat = (user: User): ReceiptType => {
   if (isMealForNow(user.settings.breakfast)) return ReceiptType.BREAKFAST;
@@ -62,13 +63,13 @@ export const inBetweenTwoDates = (from: Date, to: Date, time: Date) => {
   return from.getTime() <= time.getTime() && time.getTime() <= to.getTime();
 }
 
-export const toBuildReceipt = (receipt: BuildReceipt, ingredients: IngredientCard[]): BuildReceipt => {
-  for (const ingredientOfReceipt of receipt.receipt.ingredients) {
-    const userIngredient = ingredients.find(x=>x.ingredientWithSize.ingredient.id === ingredientOfReceipt.ingredient.id)
+export const toBuildReceipt = (receipt: Receipt, ingredients: IngredientCard[]): BuildReceipt => {
+  for (const ingredientOfReceipt of receipt.ingredients) {
+    const userIngredient = ingredients.find(x=>x.ingredient.id === ingredientOfReceipt.ingredient.id)
     if (userIngredient && !userIngredient.inCard) {
-      return {receipt: receipt.receipt, canMake: false};
+      return {receipt: receipt, canMake: false};
     }
   }
 
-  return {receipt: receipt.receipt, canMake: true};
+  return {receipt: receipt, canMake: true};
 }
