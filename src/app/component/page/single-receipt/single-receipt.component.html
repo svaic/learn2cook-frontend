@@ -47,7 +47,7 @@
                   <button class="btn btn-warning receipt-buttons" (click)="showUploadPicture()" *ngIf="state.isUploadingPictureFinished && !state.error">испрати нова слика</button>
                   <button class="btn btn-danger receipt-buttons disabled" *ngIf="state.error">{{state.error}}</button>
                   <div class="text-center d-flex" *ngIf="state.isValidateShown">
-                    <input class="form-control" type="file" (change)="onFileUpload($event)">
+                    <input class="form-control" type="file" accept="image/*"  (change)="onFileUpload($event)">
                     <div class="spinner-border mx-2" role="status" *ngIf="state.isUploadingPicture">
                       <span class="sr-only"></span>
                     </div>
